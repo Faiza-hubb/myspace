@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faizatu | Personal Journal & Goals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf9f6;
+      --card-bg: #ffffff;
+      --text-main: #1f2421;
+      --text-muted: #6b7280;
+      --accent: #2d6a4f;
+      --accent-soft: #e8f5e9;
+      --border: #e5e7eb;
+      --radius: 16px;
+      --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .profile-title h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+
+    .profile-title p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 0.5rem 1.2rem;
+      border-radius: 9999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--text-main);
+      color: #fff;
+      border-color: var(--text-main);
+    }
+
+    /* Sections */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+    }
+
+    /* Action Modal / Form Box */
+    .add-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    input[type="text"], textarea, select {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-family: inherit;
+      font-size: 0.95rem;
+      background: #fafafa;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+      background: #fff;
+    }
+
+    .btn-main {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      align-self: flex-start;
+    }
+
+    .btn-main:hover {
+      opacity: 0.9;
+    }
+
+    /* Photo Gallery */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .photo-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      background: #f0f0f0;
+    }
+
+    .photo-info {
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .photo-info h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .photo-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    /* Memories Timeline */
+    .memory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .memory-item {
+      background: var(--card-bg);
+      border-left: 4px solid var(--accent);
+      padding: 1.2rem 1.5rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .memory-date {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    /* Goals Section */
+    .goals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    .goal-card {
+      background: var(--card-bg);
+      padding: 1.25rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    .goal-card input[type="checkbox"] {
+      margin-top: 0.25rem;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .goal-content {
+      flex: 1;
+    }
+
+    .goal-content.completed p {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    .goal-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    /* Upload button custom style */
+    .file-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: #f3f4f6;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Profile & Nav -->
+    <header>
+      <div class="profile-title">
+        <h1>Faizatu's Space</h1>
+        <p>A personal corner for snapshots, milestones, and what comes next.</p>
+      </div>
+      <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="filterSection('all', this)">All</button>
+        <button class="tab-btn" onclick="filterSection('gallery', this)">Photos</button>
+        <button class="tab-btn" onclick="filterSection('memories', this)">Memories</button>
+        <button class="tab-btn" onclick="filterSection('goals', this)">Goals</button>
+      </nav>
+    </header>
+
+    <!-- SECTION 1: PHOTOS -->
+    <section id="gallery-sec">
+      <div class="section-header">
+        <h2>Photo Journal</h2>
+      </div>
+
+      <div class="add-box">
+        <h4>Add a New Snapshot</h4>
+        <div class="input-row">
+          <label class="file-label">
+            📸 Choose Photo
+            <input type="file" id="photo-file" accept="image/*" style="display: none;" onchange="previewFileName(this)">
+          </label>
+          <span id="file-name" style="align-self: center; font-size: 0.85rem; color: var(--text-muted);">No file chosen</span>
+          <input type="text" id="photo-caption" placeholder="Caption / Title..." />
+        </div>
+        <button class="btn-main" onclick="savePhoto()">Add to Gallery</button>
+      </div>
+
+      <div class="photo-grid" id="photo-container">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- SECTION 2: MEMORIES -->
+    <section id="memories-sec">
+      <div class="section-header">
+        <h2>Memories & Milestones</h2>
+      </div>
+
+      <div class="add-box">
+        <h4>Record a Memory</h4>
+        <div class="input-row">
+          <input type="text" id="mem-date" placeholder="Date (e.g., Summer 2026, Dec 14)" style="max-width: 200px;" />
+          <input type="text" id="mem-title" placeholder="Title or Event" />
+        </div>
+        <textarea id="mem-text" rows="2" placeholder="What made this moment special?"></textarea>
+        <button class="btn-main" onclick="saveMemory()">Save Memory</button>
+      </div>
+
+      <div class="memory-list" id="memories-container">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- SECTION 3: GOALS -->
+    <section id="goals-sec">
+      <div class="section-header">
+        <h2>Current Goals</h2>
+      </div>
+
+      <div class="add-box">
+        <h4>New Goal</h4>
+        <div class="input-row">
+          <select id="goal-cat" style="max-width: 180px;">
+            <option value="Academic">Academic</option>
+            <option value="Personal">Personal</option>
+            <option value="Creative">Creative</option>
+            <option value="Career">Career</option>
+          </select>
+          <input type="text" id="goal-input" placeholder="What are you working toward?" />
+        </div>
+        <button class="btn-main" onclick="saveGoal()">Add Goal</button>
+      </div>
+
+      <div class="goals-grid" id="goals-container">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // --- Data Storage Keys ---
+    const STORAGE_KEY = "faizatu_personal_space_data";
+
+    let state = {
+      photos: [],
+      memories: [],
+      goals: []
+    };
+
+    // Load initial data
+    function loadData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          state = JSON.parse(saved);
+        } catch(e) {
+          console.error(e);
+        }
+      } else {
+        // Starter defaults if empty
+        state.memories = [
+          { id: 1, date: "Recent Milestone", title: "Started this personal space", text: "A dedicated digital home to keep track of growth, creativity, and moments." }
+        ];
+        state.goals = [
+          { id: 1, category: "Creative", text: "Curate my favorite moments and progress here regularly", done: false }
+        ];
+      }
+      renderAll();
+    }
+
+    function persist() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    // --- Photo Handling ---
+    function previewFileName(input) {
+      const name = input.files[0]?.name || "No file chosen";
+      document.getElementById('file-name').textContent = name;
+    }
+
+    function savePhoto() {
+      const fileInput = document.getElementById('photo-file');
+      const caption = document.getElementById('photo-caption').value.trim() || 'Untitled';
+
+      if (!fileInput.files || !fileInput.files[0]) {
+        alert("Please pick an image file first!");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        state.photos.unshift({
+          id: Date.now(),
+          src: e.target.result,
+          caption: caption,
+          date: new Date().toLocaleDateString()
+        });
+        persist();
+        renderPhotos();
+        fileInput.value = "";
+        document.getElementById('file-name').textContent = "No file chosen";
+        document.getElementById('photo-caption').value = "";
+      };
+      reader.readAsDataURL(fileInput.files[0]);
+    }
+
+    function deletePhoto(id) {
+      state.photos = state.photos.filter(p => p.id !== id);
+      persist();
+      renderPhotos();
+    }
+
+    function renderPhotos() {
+      const container = document.getElementById('photo-container');
+      if (state.photos.length === 0) {
+        container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.95rem;">No photos uploaded yet. Select one above!</p>`;
+        return;
+      }
+      container.innerHTML = state.photos.map(p => `
+        <div class="photo-card">
+          <button class="delete-btn" onclick="deletePhoto(${p.id})">✕</button>
+          <img src="${p.src}" alt="${p.caption}" />
+          <div class="photo-info">
+            <h4>${p.caption}</h4>
+            <p>${p.date}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // --- Memories Handling ---
+    function saveMemory() {
+      const date = document.getElementById('mem-date').value.trim() || new Date().toLocaleDateString();
+      const title = document.getElementById('mem-title').value.trim();
+      const text = document.getElementById('mem-text').value.trim();
+
+      if (!title || !text) {
+        alert("Please fill in both a title and description for your memory.");
+        return;
+      }
+
+      state.memories.unshift({ id: Date.now(), date, title, text });
+      persist();
+      renderMemories();
+
+      document.getElementById('mem-date').value = "";
+      document.getElementById('mem-title').value = "";
+      document.getElementById('mem-text').value = "";
+    }
+
+    function deleteMemory(id) {
+      state.memories = state.memories.filter(m => m.id !== id);
+      persist();
+      renderMemories();
+    }
+
+    function renderMemories() {
+      const container = document.getElementById('memories-container');
+      if (state.memories.length === 0) {
+        container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.95rem;">No memories logged yet.</p>`;
+        return;
+      }
+      container.innerHTML = state.memories.map(m => `
+        <div class="memory-item">
+          <div>
+            <div class="memory-date">${m.date}</div>
+            <h4 style="margin-bottom: 0.3rem;">${m.title}</h4>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">${m.text}</p>
+          </div>
+          <button onclick="deleteMemory(${m.id})" style="border:none; background:none; cursor:pointer; color:#9ca3af; font-size:1.1rem;">✕</button>
+        </div>
+      `).join('');
+    }
+
+    // --- Goals Handling ---
+    function saveGoal() {
+      const cat = document.getElementById('goal-cat').value;
+      const text = document.getElementById('goal-input').value.trim();
+
+      if (!text) {
+        alert("Please describe your goal!");
+        return;
+      }
+
+      state.goals.unshift({ id: Date.now(), category: cat, text, done: false });
+      persist();
+      renderGoals();
+
+      document.getElementById('goal-input').value = "";
+    }
+
+    function toggleGoal(id) {
+      const g = state.goals.find(goal => goal.id === id);
+      if (g) g.done = !g.done;
+      persist();
+      renderGoals();
+    }
+
+    function deleteGoal(id) {
+      state.goals = state.goals.filter(g => g.id !== id);
+      persist();
+      renderGoals();
+    }
+
+    function renderGoals() {
+      const container = document.getElementById('goals-container');
+      if (state.goals.length === 0) {
+        container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.95rem;">No goals added yet.</p>`;
+        return;
+      }
+      container.innerHTML = state.goals.map(g => `
+        <div class="goal-card">
+          <input type="checkbox" ${g.done ? 'checked' : ''} onchange="toggleGoal(${g.id})">
+          <div class="goal-content ${g.done ? 'completed' : ''}">
+            <span class="goal-tag">${g.category}</span>
+            <p style="font-weight: 500; font-size: 0.95rem;">${g.text}</p>
+          </div>
+          <button onclick="deleteGoal(${g.id})" style="border:none; background:none; cursor:pointer; color:#9ca3af; font-size:1rem;">✕</button>
+        </div>
+      `).join('');
+    }
+
+    function renderAll() {
+      renderPhotos();
+      renderMemories();
+      renderGoals();
+    }
+
+    // --- Navigation Filtering ---
+    function filterSection(section, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const secGallery = document.getElementById('gallery-sec');
+      const secMemories = document.getElementById('memories-sec');
+      const secGoals = document.getElementById('goals-sec');
+
+      if (section === 'all') {
+        secGallery.style.display = 'block';
+        secMemories.style.display = 'block';
+        secGoals.style.display = 'block';
+      } else if (section === 'gallery') {
+        secGallery.style.display = 'block';
+        secMemories.style.display = 'none';
+        secGoals.style.display = 'none';
+      } else if (section === 'memories') {
+        secGallery.style.display = 'none';
+        secMemories.style.display = 'block';
+        secGoals.style.display = 'none';
+      } else if (section === 'goals') {
+        secGallery.style.display = 'none';
+        secMemories.style.display = 'none';
+        secGoals.style.display = 'block';
+      }
+    }
+
+    // Initialize on page load
+    loadData();
+  </script>
+</body>
+</html>
