@@ -7,8 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
-  <!-- HEIC converter library so iPhone photos work automatically -->
-  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
   <style>
     :root {
       --bg: #faf9f6;
@@ -22,11 +20,7 @@
       --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -41,10 +35,9 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 3rem;
+      gap: 2.5rem;
     }
 
-    /* Header */
     header {
       display: flex;
       justify-content: space-between;
@@ -59,7 +52,6 @@
       font-family: 'Playfair Display', serif;
       font-size: 2.4rem;
       font-weight: 600;
-      letter-spacing: -0.5px;
     }
 
     .profile-title p {
@@ -69,32 +61,30 @@
 
     .nav-tabs {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.5rem;
     }
 
     .tab-btn {
       background: transparent;
       border: 1px solid var(--border);
-      padding: 0.5rem 1.2rem;
+      padding: 0.5rem 1rem;
       border-radius: 9999px;
-      font-size: 0.9rem;
-      font-weight: 500;
+      font-size: 0.85rem;
+      font-weight: 600;
       cursor: pointer;
       color: var(--text-muted);
-      transition: all 0.2s ease;
     }
 
     .tab-btn.active, .tab-btn:hover {
       background: var(--text-main);
       color: #fff;
-      border-color: var(--text-main);
     }
 
     .section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
     }
 
     .section-header h2 {
@@ -102,7 +92,6 @@
       font-size: 1.8rem;
     }
 
-    /* Add Box */
     .add-box {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -133,11 +122,6 @@
       outline: none;
     }
 
-    input:focus, textarea:focus {
-      border-color: var(--accent);
-      background: #fff;
-    }
-
     .btn-main {
       background: var(--accent);
       color: #fff;
@@ -146,26 +130,20 @@
       border: none;
       font-weight: 600;
       cursor: pointer;
-      transition: opacity 0.2s;
       align-self: flex-start;
     }
 
-    .btn-main:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: #dc2626;
-      border: 1px solid #fca5a5;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      font-size: 0.85rem;
+    .btn-danger {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
       cursor: pointer;
     }
 
-    /* Photo Gallery */
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -187,20 +165,18 @@
       width: 100%;
       height: 240px;
       object-fit: cover;
-      background: #f0f0f0;
       display: block;
+      background-color: #f3f4f6;
     }
 
     .photo-info {
       padding: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
     }
 
     .photo-info h4 {
       font-size: 1.05rem;
       font-weight: 600;
+      margin-bottom: 0.2rem;
     }
 
     .photo-info p {
@@ -212,19 +188,16 @@
       position: absolute;
       top: 10px;
       right: 10px;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.65);
       color: white;
       border: none;
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: bold;
-      z-index: 5;
+      font-size: 0.85rem;
     }
 
-    /* Memories */
     .memory-list {
       display: flex;
       flex-direction: column;
@@ -242,7 +215,6 @@
       box-shadow: var(--shadow);
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
     }
 
     .memory-date {
@@ -250,10 +222,8 @@
       color: var(--accent);
       font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: 0.3rem;
     }
 
-    /* Goals */
     .goals-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -268,18 +238,6 @@
       box-shadow: var(--shadow);
       display: flex;
       gap: 0.75rem;
-      align-items: flex-start;
-    }
-
-    .goal-card input[type="checkbox"] {
-      margin-top: 0.25rem;
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-    }
-
-    .goal-content {
-      flex: 1;
     }
 
     .goal-content.completed p {
@@ -295,19 +253,19 @@
       background: var(--accent-soft);
       color: var(--accent);
       font-weight: 600;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
     }
 
-    .file-label {
+    .file-picker-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
       padding: 0.75rem 1.25rem;
       background: #f3f4f6;
       border-radius: 8px;
       cursor: pointer;
       font-size: 0.9rem;
-      font-weight: 500;
+      font-weight: 600;
+      border: 1px solid var(--border);
     }
   </style>
 </head>
@@ -317,359 +275,347 @@
     <header>
       <div class="profile-title">
         <h1>Faizatu's Space</h1>
-        <p>A personal corner for snapshots, milestones, and what comes next.</p>
+        <p>Snapshots, memories, and personal milestones.</p>
       </div>
       <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="filterSection('all', this)">All</button>
-        <button class="tab-btn" onclick="filterSection('gallery', this)">Photos</button>
-        <button class="tab-btn" onclick="filterSection('memories', this)">Memories</button>
-        <button class="tab-btn" onclick="filterSection('goals', this)">Goals</button>
+        <button class="tab-btn active" onclick="filterTab('all', this)">All</button>
+        <button class="tab-btn" onclick="filterTab('photos', this)">Photos</button>
+        <button class="tab-btn" onclick="filterTab('memories', this)">Memories</button>
+        <button class="tab-btn" onclick="filterTab('goals', this)">Goals</button>
       </nav>
     </header>
 
-    <!-- SECTION 1: PHOTOS -->
-    <section id="gallery-sec">
+    <!-- PHOTOS -->
+    <section id="photos-sec">
       <div class="section-header">
         <h2>Photo Journal</h2>
-        <button class="btn-outline" onclick="clearAllPhotos()">Clear Stored Photos</button>
+        <button class="btn-danger" onclick="clearAllPhotos()">Wipe Broken Photos</button>
       </div>
 
       <div class="add-box">
-        <h4>Add a New Snapshot</h4>
         <div class="input-row">
-          <label class="file-label">
-            📸 Choose Photo
-            <input type="file" id="photo-file" accept="image/*,.heic,.HEIC" style="display: none;" onchange="previewFileName(this)">
+          <label class="file-picker-btn">
+            📸 Select Image
+            <input type="file" id="file-input" accept="image/*" style="display:none;" onchange="handleFileSelect(this)">
           </label>
-          <span id="file-name" style="font-size: 0.85rem; color: var(--text-muted);">No file chosen</span>
-          <input type="text" id="photo-caption" placeholder="Caption / Title..." />
+          <span id="chosen-file-label" style="font-size:0.85rem; color:var(--text-muted);">No image selected</span>
+          <input type="text" id="photo-caption" placeholder="Add a caption..." />
         </div>
-        <div id="upload-status" style="font-size: 0.85rem; color: var(--accent); font-weight: 600; min-height: 20px;"></div>
-        <button class="btn-main" id="upload-btn" onclick="savePhoto()">Add to Gallery</button>
+        <div id="status-msg" style="font-size:0.85rem; font-weight:600; color:var(--accent);"></div>
+        <button class="btn-main" id="upload-btn" onclick="uploadPhoto()">Add to Gallery</button>
       </div>
 
       <div class="photo-grid" id="photo-container"></div>
     </section>
 
-    <!-- SECTION 2: MEMORIES -->
+    <!-- MEMORIES -->
     <section id="memories-sec">
       <div class="section-header">
-        <h2>Memories & Milestones</h2>
+        <h2>Memories</h2>
       </div>
-
       <div class="add-box">
-        <h4>Record a Memory</h4>
         <div class="input-row">
-          <input type="text" id="mem-date" placeholder="Date (e.g., Dec 2025)" style="max-width: 200px;" />
-          <input type="text" id="mem-title" placeholder="Title or Event" />
+          <input type="text" id="mem-date" placeholder="Date / Term" style="max-width:200px;" />
+          <input type="text" id="mem-title" placeholder="Title" />
         </div>
-        <textarea id="mem-text" rows="2" placeholder="What made this moment special?"></textarea>
-        <button class="btn-main" onclick="saveMemory()">Save Memory</button>
+        <textarea id="mem-text" rows="2" placeholder="Describe the memory..."></textarea>
+        <button class="btn-main" onclick="addMemory()">Save Memory</button>
       </div>
-
       <div class="memory-list" id="memories-container"></div>
     </section>
 
-    <!-- SECTION 3: GOALS -->
+    <!-- GOALS -->
     <section id="goals-sec">
       <div class="section-header">
-        <h2>Current Goals</h2>
+        <h2>Goals & Next Steps</h2>
       </div>
-
       <div class="add-box">
-        <h4>New Goal</h4>
         <div class="input-row">
-          <select id="goal-cat" style="max-width: 180px;">
+          <select id="goal-category" style="max-width:180px;">
             <option value="Academic">Academic</option>
-            <option value="Personal">Personal</option>
             <option value="Creative">Creative</option>
             <option value="Career">Career</option>
+            <option value="Personal">Personal</option>
           </select>
-          <input type="text" id="goal-input" placeholder="What are you working toward?" />
+          <input type="text" id="goal-desc" placeholder="What are you striving for?" />
         </div>
-        <button class="btn-main" onclick="saveGoal()">Add Goal</button>
+        <button class="btn-main" onclick="addGoal()">Add Goal</button>
       </div>
-
       <div class="goals-grid" id="goals-container"></div>
     </section>
   </div>
 
   <script>
-    const STORAGE_KEY = "faizatu_personal_space_data_v2";
+    // --- IndexedDB Configuration (No storage size limits) ---
+    const DB_NAME = "FaizatuSpaceDB";
+    const DB_VERSION = 1;
+    let db;
 
-    let state = {
-      photos: [],
-      memories: [],
-      goals: []
-    };
+    function openDatabase() {
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open(DB_NAME, DB_VERSION);
+        req.onupgradeneeded = (e) => {
+          const d = e.target.result;
+          if (!d.objectStoreNames.contains("photos")) d.createObjectStore("photos", { keyPath: "id" });
+          if (!d.objectStoreNames.contains("memories")) d.createObjectStore("memories", { keyPath: "id" });
+          if (!d.objectStoreNames.contains("goals")) d.createObjectStore("goals", { keyPath: "id" });
+        };
+        req.onsuccess = () => { db = req.result; resolve(); };
+        req.onerror = () => reject(req.error);
+      });
+    }
 
-    function loadData() {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        try {
-          state = JSON.parse(saved);
-        } catch(e) {
-          console.error(e);
-        }
-      } else {
-        state.memories = [
-          { id: 1, date: "Milestone", title: "Started this personal space", text: "A dedicated digital home to keep track of growth, creativity, and moments." }
-        ];
-        state.goals = [
-          { id: 1, category: "Creative", text: "Curate my favorite moments and progress here regularly", done: false }
-        ];
+    // Clean old broken localStorage cache from previous runs
+    localStorage.removeItem("faizatu_personal_space_data");
+    localStorage.removeItem("faizatu_personal_space_data_v2");
+
+    // Generic DB helper
+    function dbGetAll(storeName) {
+      return new Promise((resolve) => {
+        const tx = db.transaction(storeName, "readonly");
+        const req = tx.objectStore(storeName).getAll();
+        req.onsuccess = () => resolve(req.result || []);
+        req.onerror = () => resolve([]);
+      });
+    }
+
+    function dbPut(storeName, item) {
+      return new Promise((resolve) => {
+        const tx = db.transaction(storeName, "readwrite");
+        tx.objectStore(storeName).put(item);
+        tx.oncomplete = () => resolve();
+      });
+    }
+
+    function dbDelete(storeName, id) {
+      return new Promise((resolve) => {
+        const tx = db.transaction(storeName, "readwrite");
+        tx.objectStore(storeName).delete(id);
+        tx.oncomplete = () => resolve();
+      });
+    }
+
+    function dbClear(storeName) {
+      return new Promise((resolve) => {
+        const tx = db.transaction(storeName, "readwrite");
+        tx.objectStore(storeName).clear();
+        tx.oncomplete = () => resolve();
+      });
+    }
+
+    // --- Photo Management ---
+    let selectedFile = null;
+
+    function handleFileSelect(input) {
+      if (input.files && input.files[0]) {
+        selectedFile = input.files[0];
+        document.getElementById('chosen-file-label').textContent = selectedFile.name;
       }
-      renderAll();
     }
 
-    function persist() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      } catch (e) {
-        alert("Storage limit reached. Please delete some old pictures to add new ones.");
-      }
-    }
-
-    function previewFileName(input) {
-      const name = input.files[0]?.name || "No file chosen";
-      document.getElementById('file-name').textContent = name;
-    }
-
-    function clearAllPhotos() {
-      if (confirm("Do you want to clear all currently displayed photos?")) {
-        state.photos = [];
-        persist();
-        renderPhotos();
-      }
-    }
-
-    // Convert file to standard image Blob (converts HEIC if from iPhone)
-    async function getProcessableBlob(file) {
-      const isHeic = file.name.toLowerCase().endsWith('.heic') || file.type === 'image/heic';
-      if (isHeic && typeof heic2any !== 'undefined') {
-        const converted = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.8 });
-        return Array.isArray(converted) ? converted[0] : converted;
-      }
-      return file;
-    }
-
-    async function savePhoto() {
-      const fileInput = document.getElementById('photo-file');
+    async function uploadPhoto() {
       const caption = document.getElementById('photo-caption').value.trim() || 'Untitled';
-      const status = document.getElementById('upload-status');
-      const uploadBtn = document.getElementById('upload-btn');
+      const status = document.getElementById('status-msg');
 
-      if (!fileInput.files || !fileInput.files[0]) {
-        alert("Please choose a photo first!");
+      if (!selectedFile) {
+        alert("Please select a photo first!");
         return;
       }
 
-      uploadBtn.disabled = true;
       status.textContent = "Processing image...";
 
       try {
-        const file = fileInput.files[0];
-        const blob = await getProcessableBlob(file);
+        // High-compatibility image decoding using HTML Canvas
+        const bitmap = await createImageBitmap(selectedFile);
+        const canvas = document.createElement('canvas');
+        
+        // Scale down high-res phone pictures smoothly
+        const maxDimension = 1200;
+        let width = bitmap.width;
+        let height = bitmap.height;
 
-        // Convert to lightweight Data URL via canvas
-        const img = new Image();
-        const reader = new FileReader();
+        if (width > height && width > maxDimension) {
+          height = Math.round((height * maxDimension) / width);
+          width = maxDimension;
+        } else if (height > maxDimension) {
+          width = Math.round((width * maxDimension) / height);
+          height = maxDimension;
+        }
 
-        reader.onload = function(e) {
-          img.onload = function() {
-            const canvas = document.createElement('canvas');
-            const MAX_WIDTH = 900;
-            const scaleSize = MAX_WIDTH / img.width;
-            
-            if (img.width > MAX_WIDTH) {
-              canvas.width = MAX_WIDTH;
-              canvas.height = img.height * scaleSize;
-            } else {
-              canvas.width = img.width;
-              canvas.height = img.height;
-            }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(bitmap, 0, 0, width, height);
 
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
 
-            const compressedData = canvas.toDataURL('image/jpeg', 0.8);
+        await dbPut("photos", {
+          id: Date.now(),
+          src: dataUrl,
+          caption: caption,
+          date: new Date().toLocaleDateString()
+        });
 
-            state.photos.unshift({
-              id: Date.now(),
-              src: compressedData,
-              caption: caption,
-              date: new Date().toLocaleDateString()
-            });
+        selectedFile = null;
+        document.getElementById('file-input').value = "";
+        document.getElementById('chosen-file-label').textContent = "No image selected";
+        document.getElementById('photo-caption').value = "";
+        status.textContent = "";
 
-            persist();
-            renderPhotos();
-
-            fileInput.value = "";
-            document.getElementById('file-name').textContent = "No file chosen";
-            document.getElementById('photo-caption').value = "";
-            status.textContent = "";
-            uploadBtn.disabled = false;
-          };
-          img.src = e.target.result;
-        };
-        reader.readAsDataURL(blob);
-
+        loadPhotos();
       } catch (err) {
         console.error(err);
-        alert("There was an issue loading this photo format. Try a JPG or PNG.");
         status.textContent = "";
-        uploadBtn.disabled = false;
+        alert("Could not load this file. Please make sure it is an image (JPG, PNG, or standard camera photo).");
       }
     }
 
-    function deletePhoto(id) {
-      state.photos = state.photos.filter(p => p.id !== id);
-      persist();
-      renderPhotos();
-    }
-
-    function renderPhotos() {
+    async function loadPhotos() {
+      const list = await dbGetAll("photos");
+      list.sort((a, b) => b.id - a.id);
       const container = document.getElementById('photo-container');
-      if (state.photos.length === 0) {
-        container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.95rem;">No photos yet. Click 'Choose Photo' above to add one!</p>`;
+
+      if (list.length === 0) {
+        container.innerHTML = `<p style="color:var(--text-muted); font-size:0.95rem;">No photos yet. Click 'Select Image' above to post your first picture!</p>`;
         return;
       }
-      container.innerHTML = state.photos.map(p => `
+
+      container.innerHTML = list.map(item => `
         <div class="photo-card">
-          <button class="delete-btn" onclick="deletePhoto(${p.id})">✕</button>
-          <img src="${p.src}" alt="${p.caption}" />
+          <button class="delete-btn" onclick="removePhoto(${item.id})">✕</button>
+          <img src="${item.src}" alt="${item.caption}" />
           <div class="photo-info">
-            <h4>${p.caption}</h4>
-            <p>${p.date}</p>
+            <h4>${item.caption}</h4>
+            <p>${item.date}</p>
           </div>
         </div>
       `).join('');
     }
 
-    function saveMemory() {
+    async function removePhoto(id) {
+      await dbDelete("photos", id);
+      loadPhotos();
+    }
+
+    async function clearAllPhotos() {
+      if (confirm("This will wipe out any broken or stuck photos so you can start fresh. Continue?")) {
+        await dbClear("photos");
+        loadPhotos();
+      }
+    }
+
+    // --- Memories Management ---
+    async function addMemory() {
       const date = document.getElementById('mem-date').value.trim() || new Date().toLocaleDateString();
       const title = document.getElementById('mem-title').value.trim();
       const text = document.getElementById('mem-text').value.trim();
 
       if (!title || !text) {
-        alert("Please add a title and memory description.");
+        alert("Please enter a title and text.");
         return;
       }
 
-      state.memories.unshift({ id: Date.now(), date, title, text });
-      persist();
-      renderMemories();
-
+      await dbPut("memories", { id: Date.now(), date, title, text });
       document.getElementById('mem-date').value = "";
       document.getElementById('mem-title').value = "";
       document.getElementById('mem-text').value = "";
+      loadMemories();
     }
 
-    function deleteMemory(id) {
-      state.memories = state.memories.filter(m => m.id !== id);
-      persist();
-      renderMemories();
-    }
-
-    function renderMemories() {
+    async function loadMemories() {
+      const list = await dbGetAll("memories");
+      list.sort((a, b) => b.id - a.id);
       const container = document.getElementById('memories-container');
-      if (state.memories.length === 0) {
-        container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.95rem;">No memories logged yet.</p>`;
+
+      if (list.length === 0) {
+        container.innerHTML = `<p style="color:var(--text-muted); font-size:0.95rem;">No memories logged yet.</p>`;
         return;
       }
-      container.innerHTML = state.memories.map(m => `
+
+      container.innerHTML = list.map(m => `
         <div class="memory-item">
           <div>
             <div class="memory-date">${m.date}</div>
-            <h4 style="margin-bottom: 0.3rem;">${m.title}</h4>
-            <p style="color: var(--text-muted); font-size: 0.95rem;">${m.text}</p>
+            <h4 style="margin-bottom:0.2rem;">${m.title}</h4>
+            <p style="color:var(--text-muted); font-size:0.95rem;">${m.text}</p>
           </div>
-          <button onclick="deleteMemory(${m.id})" style="border:none; background:none; cursor:pointer; color:#9ca3af; font-size:1.1rem;">✕</button>
+          <button onclick="removeMemory(${m.id})" style="border:none; background:none; cursor:pointer; color:#9ca3af; font-size:1.1rem;">✕</button>
         </div>
       `).join('');
     }
 
-    function saveGoal() {
-      const cat = document.getElementById('goal-cat').value;
-      const text = document.getElementById('goal-input').value.trim();
+    async function removeMemory(id) {
+      await dbDelete("memories", id);
+      loadMemories();
+    }
+
+    // --- Goals Management ---
+    async function addGoal() {
+      const cat = document.getElementById('goal-category').value;
+      const text = document.getElementById('goal-desc').value.trim();
 
       if (!text) {
-        alert("Please enter a goal description.");
+        alert("Please write your goal.");
         return;
       }
 
-      state.goals.unshift({ id: Date.now(), category: cat, text, done: false });
-      persist();
-      renderGoals();
-
-      document.getElementById('goal-input').value = "";
+      await dbPut("goals", { id: Date.now(), category: cat, text, done: false });
+      document.getElementById('goal-desc').value = "";
+      loadGoals();
     }
 
-    function toggleGoal(id) {
-      const g = state.goals.find(goal => goal.id === id);
-      if (g) g.done = !g.done;
-      persist();
-      renderGoals();
+    async function toggleGoal(id, currentDone) {
+      const list = await dbGetAll("goals");
+      const goal = list.find(g => g.id === id);
+      if (goal) {
+        goal.done = !currentDone;
+        await dbPut("goals", goal);
+        loadGoals();
+      }
     }
 
-    function deleteGoal(id) {
-      state.goals = state.goals.filter(g => g.id !== id);
-      persist();
-      renderGoals();
+    async function removeGoal(id) {
+      await dbDelete("goals", id);
+      loadGoals();
     }
 
-    function renderGoals() {
+    async function loadGoals() {
+      const list = await dbGetAll("goals");
+      list.sort((a, b) => b.id - a.id);
       const container = document.getElementById('goals-container');
-      if (state.goals.length === 0) {
-        container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.95rem;">No goals added yet.</p>`;
+
+      if (list.length === 0) {
+        container.innerHTML = `<p style="color:var(--text-muted); font-size:0.95rem;">No goals added yet.</p>`;
         return;
       }
-      container.innerHTML = state.goals.map(g => `
+
+      container.innerHTML = list.map(g => `
         <div class="goal-card">
-          <input type="checkbox" ${g.done ? 'checked' : ''} onchange="toggleGoal(${g.id})">
+          <input type="checkbox" ${g.done ? 'checked' : ''} onchange="toggleGoal(${g.id}, ${g.done})">
           <div class="goal-content ${g.done ? 'completed' : ''}">
             <span class="goal-tag">${g.category}</span>
             <p style="font-weight: 500; font-size: 0.95rem;">${g.text}</p>
           </div>
-          <button onclick="deleteGoal(${g.id})" style="border:none; background:none; cursor:pointer; color:#9ca3af; font-size:1rem;">✕</button>
+          <button onclick="removeGoal(${g.id})" style="border:none; background:none; cursor:pointer; color:#9ca3af; font-size:1rem;">✕</button>
         </div>
       `).join('');
     }
 
-    function renderAll() {
-      renderPhotos();
-      renderMemories();
-      renderGoals();
-    }
-
-    function filterSection(section, btn) {
+    function filterTab(tab, btn) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      const secGallery = document.getElementById('gallery-sec');
-      const secMemories = document.getElementById('memories-sec');
-      const secGoals = document.getElementById('goals-sec');
-
-      if (section === 'all') {
-        secGallery.style.display = 'block';
-        secMemories.style.display = 'block';
-        secGoals.style.display = 'block';
-      } else if (section === 'gallery') {
-        secGallery.style.display = 'block';
-        secMemories.style.display = 'none';
-        secGoals.style.display = 'none';
-      } else if (section === 'memories') {
-        secGallery.style.display = 'none';
-        secMemories.style.display = 'block';
-        secGoals.style.display = 'none';
-      } else if (section === 'goals') {
-        secGallery.style.display = 'none';
-        secMemories.style.display = 'none';
-        secGoals.style.display = 'block';
-      }
+      document.getElementById('photos-sec').style.display = (tab === 'all' || tab === 'photos') ? 'block' : 'none';
+      document.getElementById('memories-sec').style.display = (tab === 'all' || tab === 'memories') ? 'block' : 'none';
+      document.getElementById('goals-sec').style.display = (tab === 'all' || tab === 'goals') ? 'block' : 'none';
     }
 
-    loadData();
+    // Initialize Database
+    openDatabase().then(() => {
+      loadPhotos();
+      loadMemories();
+      loadGoals();
+    });
   </script>
 </body>
 </html>
