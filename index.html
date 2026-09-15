@@ -3,105 +3,138 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Faizatu | Personal Journal & Goals</title>
+  <title>Faizatu's Cozy Corner 🌸✨</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #faf9f6;
-      --card-bg: #ffffff;
-      --text-main: #1f2421;
-      --text-muted: #6b7280;
-      --accent: #2d6a4f;
-      --accent-soft: #e8f5e9;
-      --border: #e5e7eb;
-      --radius: 16px;
-      --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      --bg: #fff0f5;
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --pink-soft: #ffe5ec;
+      --pink-primary: #ff758f;
+      --pink-hover: #ff4d6d;
+      --pink-deep: #a4133c;
+      --accent-lilac: #e8dff5;
+      --text-main: #4a2835;
+      --text-muted: #8d6b77;
+      --border-cute: 2px dashed #ffb3c1;
+      --radius: 24px;
+      --shadow: 0 10px 25px rgba(255, 117, 143, 0.12);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg);
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #fff0f5 0%, #fff5f8 50%, #fdeff4 100%);
       color: var(--text-main);
       line-height: 1.6;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem;
+      min-height: 100vh;
     }
 
     .container {
-      max-width: 1080px;
+      max-width: 980px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       gap: 2.5rem;
     }
 
+    /* Cute Header */
     header {
+      background: var(--card-bg);
+      border-radius: 32px;
+      padding: 2.2rem;
+      border: 3px solid #ffccd5;
+      box-shadow: var(--shadow);
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 1.5rem;
+      align-items: center;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
     .profile-title h1 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Fredoka', sans-serif;
       font-size: 2.4rem;
-      font-weight: 600;
+      color: var(--pink-hover);
+      letter-spacing: -0.5px;
+      margin-bottom: 0.2rem;
     }
 
     .profile-title p {
       color: var(--text-muted);
-      font-size: 1rem;
+      font-size: 1.05rem;
+      font-weight: 600;
     }
 
     .nav-tabs {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.6rem;
+      background: #fff;
+      padding: 0.4rem;
+      border-radius: 9999px;
+      border: 2px solid #ffccd5;
     }
 
     .tab-btn {
       background: transparent;
-      border: 1px solid var(--border);
-      padding: 0.5rem 1rem;
+      border: none;
+      padding: 0.55rem 1.25rem;
       border-radius: 9999px;
-      font-size: 0.85rem;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
       color: var(--text-muted);
+      transition: all 0.25s ease;
     }
 
     .tab-btn.active, .tab-btn:hover {
-      background: var(--text-main);
+      background: var(--pink-primary);
       color: #fff;
+      transform: scale(1.04);
+      box-shadow: 0 4px 12px rgba(255, 117, 143, 0.35);
     }
 
+    /* Section Styling */
     .section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1.2rem;
+      padding: 0 0.5rem;
     }
 
     .section-header h2 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Fredoka', sans-serif;
       font-size: 1.8rem;
+      color: var(--pink-deep);
     }
 
+    /* Cute Add Box */
     .add-box {
       background: var(--card-bg);
-      border: 1px solid var(--border);
+      border: 2px solid #ffccd5;
       border-radius: var(--radius);
-      padding: 1.5rem;
+      padding: 1.8rem;
       box-shadow: var(--shadow);
       margin-bottom: 2rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.2rem;
+    }
+
+    .add-box h4 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.2rem;
+      color: var(--pink-hover);
     }
 
     .input-row {
@@ -113,241 +146,343 @@
 
     input[type="text"], textarea, select {
       flex: 1;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      font-family: inherit;
+      padding: 0.8rem 1.1rem;
+      border-radius: 16px;
+      border: 2px solid #ffe5ec;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
       font-size: 0.95rem;
-      background: #fafafa;
+      background: #ffffff;
       outline: none;
+      transition: border-color 0.2s ease;
+      color: var(--text-main);
     }
 
-    .btn-main {
-      background: var(--accent);
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--pink-primary);
+    }
+
+    /* Buttons */
+    .btn-cute {
+      background: linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%);
       color: #fff;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
+      padding: 0.8rem 1.6rem;
+      border-radius: 9999px;
       border: none;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
+      box-shadow: 0 4px 14px rgba(255, 77, 109, 0.3);
+      transition: all 0.2s ease;
       align-self: flex-start;
     }
 
-    .btn-danger {
-      background: #fee2e2;
-      color: #991b1b;
-      border: 1px solid #fecaca;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .photo-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .photo-card img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      display: block;
-      background-color: #f3f4f6;
-    }
-
-    .photo-info {
-      padding: 1.2rem;
-    }
-
-    .photo-info h4 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 0.2rem;
-    }
-
-    .photo-info p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .delete-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.65);
-      color: white;
-      border: none;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 0.85rem;
-    }
-
-    .memory-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .memory-item {
-      background: var(--card-bg);
-      border-left: 4px solid var(--accent);
-      padding: 1.2rem 1.5rem;
-      border-radius: 0 var(--radius) var(--radius) 0;
-      border-top: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .memory-date {
-      font-size: 0.8rem;
-      color: var(--accent);
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .goals-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1rem;
-    }
-
-    .goal-card {
-      background: var(--card-bg);
-      padding: 1.25rem;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      display: flex;
-      gap: 0.75rem;
-    }
-
-    .goal-content.completed p {
-      text-decoration: line-through;
-      color: var(--text-muted);
-    }
-
-    .goal-tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 0.3rem;
+    .btn-cute:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(255, 77, 109, 0.45);
     }
 
     .file-picker-btn {
       display: inline-flex;
       align-items: center;
-      padding: 0.75rem 1.25rem;
-      background: #f3f4f6;
-      border-radius: 8px;
+      gap: 0.5rem;
+      padding: 0.75rem 1.3rem;
+      background: #fff;
+      border: 2px solid #ffccd5;
+      border-radius: 9999px;
+      font-family: 'Fredoka', sans-serif;
+      color: var(--pink-hover);
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .file-picker-btn:hover {
+      background: #ffe5ec;
+    }
+
+    .btn-clear {
+      background: #fff0f3;
+      border: 1.5px solid #ffccd5;
+      color: var(--pink-deep);
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.85rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+      cursor: pointer;
+    }
+
+    /* Photo Grid & Cards */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .photo-card {
+      background: #ffffff;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 3px solid #ffe5ec;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-5px);
+      border-color: #ffb3c1;
+      box-shadow: 0 14px 28px rgba(255, 117, 143, 0.2);
+    }
+
+    /* Instagram-proportioned image framing: naturally displays face & shoulders */
+    .photo-card img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+      background: #ffeef2;
+    }
+
+    .photo-info {
+      padding: 1.2rem 1.4rem;
+      background: #fff;
+    }
+
+    .photo-info h4 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.15rem;
+      color: var(--pink-deep);
+      margin-bottom: 0.25rem;
+    }
+
+    .photo-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(4px);
+      color: var(--pink-deep);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
       cursor: pointer;
       font-size: 0.9rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: background 0.2s;
+    }
+
+    .delete-btn:hover {
+      background: #ff4d6d;
+      color: #fff;
+    }
+
+    /* Memories List */
+    .memory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .memory-item {
+      background: #ffffff;
+      border-left: 6px solid var(--pink-primary);
+      padding: 1.4rem 1.6rem;
+      border-radius: 0 24px 24px 0;
+      border-top: 2px solid #ffe5ec;
+      border-right: 2px solid #ffe5ec;
+      border-bottom: 2px solid #ffe5ec;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .memory-date {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.85rem;
+      color: var(--pink-hover);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.2rem;
+    }
+
+    .memory-item h4 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.15rem;
+      color: var(--text-main);
+      margin-bottom: 0.4rem;
+    }
+
+    .memory-item p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
       font-weight: 600;
-      border: 1px solid var(--border);
+    }
+
+    /* Goals */
+    .goals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .goal-card {
+      background: #ffffff;
+      padding: 1.4rem;
+      border-radius: 24px;
+      border: 2px solid #ffe5ec;
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+      transition: transform 0.2s ease;
+    }
+
+    .goal-card:hover {
+      transform: translateY(-2px);
+      border-color: #ffccd5;
+    }
+
+    .goal-card input[type="checkbox"] {
+      margin-top: 0.3rem;
+      width: 20px;
+      height: 20px;
+      accent-color: var(--pink-primary);
+      cursor: pointer;
+    }
+
+    .goal-tag {
+      display: inline-block;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      background: #ffe5ec;
+      color: var(--pink-deep);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .goal-content.completed p {
+      text-decoration: line-through;
+      color: #b5a3ab;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.95rem;
+      color: var(--pink-hover);
     }
   </style>
 </head>
 <body>
 
   <div class="container">
+    <!-- Header -->
     <header>
       <div class="profile-title">
-        <h1>Faizatu's Space</h1>
-        <p>Snapshots, memories, and personal milestones.</p>
+        <h1>Faizatu's Space 🌸</h1>
+        <p>A little pink corner for my snapshots, dreams & thoughts ✨</p>
       </div>
       <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="filterTab('all', this)">All</button>
-        <button class="tab-btn" onclick="filterTab('photos', this)">Photos</button>
-        <button class="tab-btn" onclick="filterTab('memories', this)">Memories</button>
-        <button class="tab-btn" onclick="filterTab('goals', this)">Goals</button>
+        <button class="tab-btn active" onclick="filterTab('all', this)">All 🎀</button>
+        <button class="tab-btn" onclick="filterTab('photos', this)">Photos 📸</button>
+        <button class="tab-btn" onclick="filterTab('memories', this)">Memories 💌</button>
+        <button class="tab-btn" onclick="filterTab('goals', this)">Goals 🌷</button>
       </nav>
     </header>
 
-    <!-- PHOTOS -->
+    <!-- SECTION 1: PHOTOS -->
     <section id="photos-sec">
       <div class="section-header">
-        <h2>Photo Journal</h2>
-        <button class="btn-danger" onclick="clearAllPhotos()">Wipe Broken Photos</button>
+        <h2>Photo Journal 📸</h2>
+        <button class="btn-clear" onclick="clearAllPhotos()">Clear Photos</button>
       </div>
 
       <div class="add-box">
+        <h4>Post a New Picture 🌷</h4>
         <div class="input-row">
           <label class="file-picker-btn">
-            📸 Select Image
+            🎀 Pick Image
             <input type="file" id="file-input" accept="image/*" style="display:none;" onchange="handleFileSelect(this)">
           </label>
-          <span id="chosen-file-label" style="font-size:0.85rem; color:var(--text-muted);">No image selected</span>
-          <input type="text" id="photo-caption" placeholder="Add a caption..." />
+          <span id="chosen-file-label" style="font-size:0.88rem; font-weight:600; color:var(--text-muted);">No picture chosen</span>
+          <input type="text" id="photo-caption" placeholder="Write a cute caption..." />
         </div>
-        <div id="status-msg" style="font-size:0.85rem; font-weight:600; color:var(--accent);"></div>
-        <button class="btn-main" id="upload-btn" onclick="uploadPhoto()">Add to Gallery</button>
+        <div id="status-msg" style="font-size:0.88rem; font-weight:700; color:var(--pink-hover);"></div>
+        <button class="btn-cute" onclick="uploadPhoto()">Add to Gallery ✨</button>
       </div>
 
       <div class="photo-grid" id="photo-container"></div>
     </section>
 
-    <!-- MEMORIES -->
+    <!-- SECTION 2: MEMORIES -->
     <section id="memories-sec">
       <div class="section-header">
-        <h2>Memories</h2>
+        <h2>Cherished Memories 💌</h2>
       </div>
+
       <div class="add-box">
+        <h4>Note Down a Memory 💭</h4>
         <div class="input-row">
-          <input type="text" id="mem-date" placeholder="Date / Term" style="max-width:200px;" />
-          <input type="text" id="mem-title" placeholder="Title" />
+          <input type="text" id="mem-date" placeholder="Date (e.g. Sept 2026)" style="max-width:200px;" />
+          <input type="text" id="mem-title" placeholder="Title of this moment..." />
         </div>
-        <textarea id="mem-text" rows="2" placeholder="Describe the memory..."></textarea>
-        <button class="btn-main" onclick="addMemory()">Save Memory</button>
+        <textarea id="mem-text" rows="2" placeholder="Tell the story of what happened..."></textarea>
+        <button class="btn-cute" onclick="addMemory()">Save Memory 💖</button>
       </div>
+
       <div class="memory-list" id="memories-container"></div>
     </section>
 
-    <!-- GOALS -->
+    <!-- SECTION 3: GOALS -->
     <section id="goals-sec">
       <div class="section-header">
-        <h2>Goals & Next Steps</h2>
+        <h2>Goals & Aspirations 🌟</h2>
       </div>
+
       <div class="add-box">
+        <h4>Set a New Goal 🎯</h4>
         <div class="input-row">
           <select id="goal-category" style="max-width:180px;">
-            <option value="Academic">Academic</option>
-            <option value="Creative">Creative</option>
-            <option value="Career">Career</option>
-            <option value="Personal">Personal</option>
+            <option value="Academic 📚">Academic 📚</option>
+            <option value="Personal 🌸">Personal 🌸</option>
+            <option value="Creative 🎨">Creative 🎨</option>
+            <option value="Career 💼">Career 💼</option>
           </select>
-          <input type="text" id="goal-desc" placeholder="What are you striving for?" />
+          <input type="text" id="goal-desc" placeholder="What dream are you chasing next?" />
         </div>
-        <button class="btn-main" onclick="addGoal()">Add Goal</button>
+        <button class="btn-cute" onclick="addGoal()">Add Goal 💫</button>
       </div>
+
       <div class="goals-grid" id="goals-container"></div>
     </section>
+
+    <footer>
+      <p>Made with love & pretty dreams 🌸 &bull; Faizatu's Journal</p>
+    </footer>
   </div>
 
   <script>
-    // --- IndexedDB Configuration (No storage size limits) ---
-    const DB_NAME = "FaizatuSpaceDB";
+    // --- IndexedDB Configuration (Reliable local browser storage) ---
+    const DB_NAME = "FaizatuPinkCornerDB";
     const DB_VERSION = 1;
     let db;
 
@@ -365,11 +500,6 @@
       });
     }
 
-    // Clean old broken localStorage cache from previous runs
-    localStorage.removeItem("faizatu_personal_space_data");
-    localStorage.removeItem("faizatu_personal_space_data_v2");
-
-    // Generic DB helper
     function dbGetAll(storeName) {
       return new Promise((resolve) => {
         const tx = db.transaction(storeName, "readonly");
@@ -414,23 +544,22 @@
     }
 
     async function uploadPhoto() {
-      const caption = document.getElementById('photo-caption').value.trim() || 'Untitled';
+      const caption = document.getElementById('photo-caption').value.trim() || 'Pretty moment 🌸';
       const status = document.getElementById('status-msg');
 
       if (!selectedFile) {
-        alert("Please select a photo first!");
+        alert("Please pick a picture first! 🎀");
         return;
       }
 
-      status.textContent = "Processing image...";
+      status.textContent = "Processing picture with sparkle... ✨";
 
       try {
-        // High-compatibility image decoding using HTML Canvas
         const bitmap = await createImageBitmap(selectedFile);
         const canvas = document.createElement('canvas');
-        
-        // Scale down high-res phone pictures smoothly
-        const maxDimension = 1200;
+
+        // Smoothly resize to portrait standard
+        const maxDimension = 1400;
         let width = bitmap.width;
         let height = bitmap.height;
 
@@ -447,7 +576,7 @@
         const ctx = canvas.getContext('2d');
         ctx.drawImage(bitmap, 0, 0, width, height);
 
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.88);
 
         await dbPut("photos", {
           id: Date.now(),
@@ -458,7 +587,7 @@
 
         selectedFile = null;
         document.getElementById('file-input').value = "";
-        document.getElementById('chosen-file-label').textContent = "No image selected";
+        document.getElementById('chosen-file-label').textContent = "No picture chosen";
         document.getElementById('photo-caption').value = "";
         status.textContent = "";
 
@@ -466,7 +595,7 @@
       } catch (err) {
         console.error(err);
         status.textContent = "";
-        alert("Could not load this file. Please make sure it is an image (JPG, PNG, or standard camera photo).");
+        alert("Could not load image format. Please make sure it's a standard image file.");
       }
     }
 
@@ -476,7 +605,7 @@
       const container = document.getElementById('photo-container');
 
       if (list.length === 0) {
-        container.innerHTML = `<p style="color:var(--text-muted); font-size:0.95rem;">No photos yet. Click 'Select Image' above to post your first picture!</p>`;
+        container.innerHTML = `<p style="color:var(--text-muted); font-size:0.95rem; font-weight:600;">No pictures added yet! Click 'Pick Image' above to add your first snapshot 🌸</p>`;
         return;
       }
 
@@ -498,7 +627,7 @@
     }
 
     async function clearAllPhotos() {
-      if (confirm("This will wipe out any broken or stuck photos so you can start fresh. Continue?")) {
+      if (confirm("Do you want to clear your uploaded photos?")) {
         await dbClear("photos");
         loadPhotos();
       }
@@ -511,7 +640,7 @@
       const text = document.getElementById('mem-text').value.trim();
 
       if (!title || !text) {
-        alert("Please enter a title and text.");
+        alert("Please write a title and memory description! 💕");
         return;
       }
 
@@ -528,7 +657,7 @@
       const container = document.getElementById('memories-container');
 
       if (list.length === 0) {
-        container.innerHTML = `<p style="color:var(--text-muted); font-size:0.95rem;">No memories logged yet.</p>`;
+        container.innerHTML = `<p style="color:var(--text-muted); font-size:0.95rem; font-weight:600;">No memories recorded yet. What made you smile recently? 💭</p>`;
         return;
       }
 
@@ -536,10 +665,10 @@
         <div class="memory-item">
           <div>
             <div class="memory-date">${m.date}</div>
-            <h4 style="margin-bottom:0.2rem;">${m.title}</h4>
-            <p style="color:var(--text-muted); font-size:0.95rem;">${m.text}</p>
+            <h4>${m.title}</h4>
+            <p>${m.text}</p>
           </div>
-          <button onclick="removeMemory(${m.id})" style="border:none; background:none; cursor:pointer; color:#9ca3af; font-size:1.1rem;">✕</button>
+          <button onclick="removeMemory(${m.id})" style="border:none; background:none; cursor:pointer; color:#ff8fa3; font-size:1.1rem; font-weight:bold;">✕</button>
         </div>
       `).join('');
     }
@@ -555,7 +684,7 @@
       const text = document.getElementById('goal-desc').value.trim();
 
       if (!text) {
-        alert("Please write your goal.");
+        alert("Please type out your goal! 🌷");
         return;
       }
 
@@ -585,7 +714,7 @@
       const container = document.getElementById('goals-container');
 
       if (list.length === 0) {
-        container.innerHTML = `<p style="color:var(--text-muted); font-size:0.95rem;">No goals added yet.</p>`;
+        container.innerHTML = `<p style="color:var(--text-muted); font-size:0.95rem; font-weight:600;">No goals added yet. Dream big! ✨</p>`;
         return;
       }
 
@@ -594,13 +723,14 @@
           <input type="checkbox" ${g.done ? 'checked' : ''} onchange="toggleGoal(${g.id}, ${g.done})">
           <div class="goal-content ${g.done ? 'completed' : ''}">
             <span class="goal-tag">${g.category}</span>
-            <p style="font-weight: 500; font-size: 0.95rem;">${g.text}</p>
+            <p style="font-weight: 600; font-size: 0.95rem;">${g.text}</p>
           </div>
-          <button onclick="removeGoal(${g.id})" style="border:none; background:none; cursor:pointer; color:#9ca3af; font-size:1rem;">✕</button>
+          <button onclick="removeGoal(${g.id})" style="border:none; background:none; cursor:pointer; color:#ff8fa3; font-size:1rem; font-weight:bold;">✕</button>
         </div>
       `).join('');
     }
 
+    // Tab Filtering
     function filterTab(tab, btn) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -610,7 +740,7 @@
       document.getElementById('goals-sec').style.display = (tab === 'all' || tab === 'goals') ? 'block' : 'none';
     }
 
-    // Initialize Database
+    // Boot
     openDatabase().then(() => {
       loadPhotos();
       loadMemories();
