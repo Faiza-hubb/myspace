@@ -3,29 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Faizatu's Cozy Corner 🌸✨</title>
+  <title>Faizatu's Space 🌸✨</title>
+  
+  <!-- Preconnect & Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Client-side HEIC Image Converter for iPhone compatibility -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
 
-  <!-- iOS App Settings -->
+  <!-- iOS App Meta Settings -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Faizatu" />
-  <meta name="theme-color" content="#fff5f8" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Faizatu's Space" />
+  <meta name="theme-color" content="#fff0f5" />
   <link rel="apple-touch-icon" href="https://img.icons8.com/fluency/192/cherry-blossom.png" />
 
   <style>
     :root {
-      --bg: #fff5f8;
+      --bg: #fff0f5;
+      --card-bg: rgba(255, 255, 255, 0.96);
       --pink-soft: #ffe5ec;
       --pink-primary: #ff758f;
       --pink-hover: #ff4d6d;
       --pink-deep: #a4133c;
-      --text-main: #3d232c;
-      --text-muted: #8a6c76;
-      --radius: 18px;
+      --text-main: #442431;
+      --text-muted: #8c6775;
+      --border-pink: #ffd0dc;
+      --radius-sm: 14px;
+      --radius-md: 22px;
+      --radius-lg: 28px;
+      --shadow: 0 8px 24px rgba(255, 117, 143, 0.12);
+      --shadow-sm: 0 4px 14px rgba(255, 117, 143, 0.08);
     }
 
     * {
@@ -38,444 +48,641 @@
     html, body {
       width: 100%;
       overflow-x: hidden;
-      background-color: var(--bg);
+      background: linear-gradient(150deg, #fff0f5 0%, #fff7fa 40%, #fdeff4 100%);
       font-family: 'Quicksand', sans-serif;
       color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* Proper iPhone safe area bounds */
     body {
       display: flex;
       flex-direction: column;
-      padding-bottom: calc(65px + env(safe-area-inset-bottom));
+      padding-top: max(0.9rem, env(safe-area-inset-top));
+      padding-left: max(0.85rem, env(safe-area-inset-left));
+      padding-right: max(0.85rem, env(safe-area-inset-right));
+      padding-bottom: calc(2rem + env(safe-area-inset-bottom));
       min-height: 100vh;
     }
 
-    /* Fixed Clean App Top Header with iPhone Notch fix */
-    .app-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1.5px solid #ffd6e0;
-      padding-top: max(0.8rem, env(safe-area-inset-top));
-      padding-bottom: 0.7rem;
-      padding-left: 1rem;
-      padding-right: 1rem;
-      text-align: center;
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
 
-    .app-header h1 {
+    /* Header styling with safe island clearance */
+    header {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.25rem;
+      border: 2.5px solid var(--border-pink);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .profile-title h1 {
       font-family: 'Fredoka', sans-serif;
-      font-size: 1.35rem;
+      font-size: 1.85rem;
       color: var(--pink-hover);
       letter-spacing: -0.3px;
+      line-height: 1.2;
     }
 
-    .app-header p {
-      font-size: 0.78rem;
+    .profile-title p {
       color: var(--text-muted);
+      font-size: 0.92rem;
       font-weight: 600;
+      margin-top: 0.2rem;
     }
 
-    /* Main Container */
-    .app-content {
-      width: 100%;
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 0.85rem 0.6rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
-    /* Native Bottom Navigation Bar */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: calc(58px + env(safe-area-inset-bottom));
-      padding-bottom: env(safe-area-inset-bottom);
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-top: 1.5px solid #ffd6e0;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.15rem;
-      background: none;
-      border: none;
-      font-family: 'Fredoka', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
-      flex: 1;
-      height: 100%;
-      transition: color 0.15s ease;
-    }
-
-    .nav-item .icon {
-      font-size: 1.25rem;
+    .header-emoji {
+      font-size: 2rem;
       line-height: 1;
+      filter: drop-shadow(0 2px 6px rgba(255, 117, 143, 0.3));
     }
 
-    .nav-item.active {
-      color: var(--pink-primary);
+    /* Smooth Nav Bar */
+    .nav-tabs {
+      display: flex;
+      gap: 0.45rem;
+      background: #ffffff;
+      padding: 0.35rem;
+      border-radius: 9999px;
+      border: 2px solid var(--border-pink);
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+    .nav-tabs::-webkit-scrollbar { display: none; }
 
-    .section-title {
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 0.55rem 1.15rem;
+      border-radius: 9999px;
       font-family: 'Fredoka', sans-serif;
-      font-size: 1.15rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .tab-btn.active {
+      background: var(--pink-primary);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(255, 117, 143, 0.4);
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.9rem;
+      padding: 0 0.3rem;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .section-header h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.45rem;
       color: var(--pink-deep);
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 0 0.3rem;
-      margin-bottom: 0.6rem;
+      gap: 0.4rem;
     }
 
-    /* 3-COLUMN iPHONE PHOTO GRID */
-    .ios-photo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
+    .view-switcher {
+      display: inline-flex;
       background: #fff;
-      padding: 3px;
-      border: 1.5px solid #ffe5ec;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 9999px;
+      padding: 0.2rem;
+      gap: 0.2rem;
     }
 
-    .grid-thumb {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      background: #f7e6ec;
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .grid-thumb img, .grid-thumb video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .video-badge {
-      position: absolute;
-      bottom: 4px;
-      right: 4px;
-      background: rgba(0, 0, 0, 0.65);
-      color: #fff;
-      font-size: 0.65rem;
-      padding: 2px 5px;
-      border-radius: 4px;
-      font-family: 'Fredoka', sans-serif;
-      display: flex;
-      align-items: center;
-      gap: 2px;
-    }
-
-    /* FULLSCREEN PHOTO/VIDEO VIEWER MODAL */
-    .viewer-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(18, 12, 15, 0.96);
-      z-index: 2000;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: max(1rem, env(safe-area-inset-top)) 1rem max(1rem, env(safe-area-inset-bottom)) 1rem;
-    }
-
-    .viewer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #fff;
-    }
-
-    .viewer-close, .viewer-del {
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
+    .view-btn {
       border: none;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      font-size: 1.1rem;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .viewer-body {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-height: 70vh;
-    }
-
-    .viewer-body img, .viewer-body video {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 12px;
-    }
-
-    .viewer-info {
-      text-align: center;
-      color: #fff;
-      padding: 0.8rem;
-    }
-
-    .viewer-info h4 {
+      background: none;
+      padding: 0.3rem 0.65rem;
+      border-radius: 9999px;
       font-family: 'Fredoka', sans-serif;
-      font-size: 1.1rem;
-      margin-bottom: 0.2rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.15s ease;
     }
 
-    .viewer-info p {
-      font-size: 0.8rem;
-      color: #ffd6e0;
+    .view-btn.active {
+      background: var(--pink-soft);
+      color: var(--pink-deep);
     }
 
-    /* Form Panels */
-    .app-card {
-      background: #ffffff;
-      border-radius: var(--radius);
-      border: 1.5px solid #ffe5ec;
-      padding: 1.1rem;
-      box-shadow: 0 4px 16px rgba(255, 117, 143, 0.08);
+    /* Interactive Upload Box */
+    .add-box {
+      background: var(--card-bg);
+      border: 2px solid var(--border-pink);
+      border-radius: var(--radius-md);
+      padding: 1.3rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 0.95rem;
+    }
+
+    .add-box h4 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.15rem;
+      color: var(--pink-hover);
+    }
+
+    .input-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    @media (min-width: 640px) {
+      .input-row.two-col {
+        flex-direction: row;
+      }
     }
 
     input[type="text"], textarea, select {
       width: 100%;
-      padding: 0.75rem 0.9rem;
-      border-radius: 14px;
-      border: 1.5px solid #ffd6e0;
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--pink-soft);
       font-family: 'Quicksand', sans-serif;
-      font-size: 0.9rem;
       font-weight: 600;
-      background: #fff;
+      font-size: 0.92rem;
+      background: #ffffff;
       outline: none;
       color: var(--text-main);
+      transition: border-color 0.2s ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--pink-primary);
+    }
+
+    .file-picker-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.25rem;
+      background: #ffffff;
+      border: 2px dashed var(--pink-primary);
+      border-radius: var(--radius-sm);
+      font-family: 'Fredoka', sans-serif;
+      color: var(--pink-hover);
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: background 0.2s ease;
+      text-align: center;
+    }
+
+    .file-picker-label:active {
+      background: var(--pink-soft);
     }
 
     .btn-cute {
       background: linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%);
       color: #fff;
-      padding: 0.8rem;
+      padding: 0.85rem 1.6rem;
       border-radius: 9999px;
       border: none;
       font-family: 'Fredoka', sans-serif;
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       font-weight: 600;
       cursor: pointer;
+      box-shadow: 0 4px 14px rgba(255, 77, 109, 0.35);
       width: 100%;
-      box-shadow: 0 4px 12px rgba(255, 77, 109, 0.25);
+      text-align: center;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .btn-upload {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      padding: 0.75rem;
-      border-radius: 14px;
-      border: 1.5px dashed var(--pink-primary);
-      background: #fff8fa;
-      color: var(--pink-hover);
-      font-family: 'Fredoka', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-align: center;
+    .btn-cute:active {
+      transform: scale(0.98);
+      box-shadow: 0 2px 8px rgba(255, 77, 109, 0.25);
+    }
+
+    @media (min-width: 640px) {
+      .btn-cute {
+        width: auto;
+        align-self: flex-start;
+      }
     }
 
     .btn-clear {
       background: #fff0f3;
-      border: 1px solid #ffd6e0;
+      border: 1.5px solid var(--border-pink);
       color: var(--pink-deep);
       font-family: 'Fredoka', sans-serif;
-      font-size: 0.75rem;
-      padding: 0.3rem 0.7rem;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.8rem;
       border-radius: 9999px;
       cursor: pointer;
+      font-weight: 600;
     }
 
-    /* Memories & Goals */
-    .mem-item {
-      background: #fff;
-      border-left: 4px solid var(--pink-primary);
-      padding: 0.9rem 1rem;
-      border-radius: 0 16px 16px 0;
-      border: 1px solid #ffe5ec;
-      border-left: 4px solid var(--pink-primary);
-      margin-bottom: 0.75rem;
+    /* ========================================================
+       NATURAL PHOTO & VIDEO GALLERY (NO CROPPING / NO TINY BOXES)
+       ======================================================== */
+    .media-gallery-grid {
+      display: grid;
+      gap: 1.4rem;
+      width: 100%;
+    }
+
+    /* Single Column Feed View (Spacious, prominent full width) */
+    .media-gallery-grid.layout-feed {
+      grid-template-columns: 1fr;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* Clean 2-Column Responsive Layout (Big enough for phone screens) */
+    .media-gallery-grid.layout-columns {
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 520px) {
+      .media-gallery-grid.layout-columns {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 820px) {
+      .media-gallery-grid.layout-columns {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .journal-media-card {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 2px solid var(--border-pink);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .journal-media-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(255, 117, 143, 0.18);
+    }
+
+    /* Media viewport: Displays natural, generous dimensions without forced square crop */
+    .media-asset-container {
+      width: 100%;
+      background: #fff5f8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-bottom: 1.5px solid var(--pink-soft);
+    }
+
+    .journal-media-card img {
+      width: 100%;
+      height: auto;
+      max-height: 580px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .journal-media-card video {
+      width: 100%;
+      max-height: 580px;
+      display: block;
+      background: #000;
+    }
+
+    /* ALWAYS VISIBLE CAPTIONS & DATES */
+    .media-caption-area {
+      padding: 1rem 1.15rem;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .media-caption-area h4 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.08rem;
+      color: var(--pink-deep);
+      line-height: 1.35;
+      word-break: break-word;
+    }
+
+    .media-meta {
       display: flex;
       justify-content: space-between;
-      gap: 0.7rem;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-top: 0.2rem;
     }
 
-    .goal-row {
-      background: #fff;
-      padding: 0.85rem 1rem;
-      border-radius: 16px;
-      border: 1.5px solid #ffe5ec;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .goal-row input[type="checkbox"] {
-      margin-top: 0.15rem;
-      width: 18px;
-      height: 18px;
-      accent-color: var(--pink-primary);
-    }
-
-    .goal-badge {
+    .media-tag-pill {
       font-family: 'Fredoka', sans-serif;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       padding: 0.15rem 0.55rem;
       border-radius: 9999px;
       background: var(--pink-soft);
       color: var(--pink-deep);
-      font-weight: 600;
     }
 
-    .done-text {
+    .card-del-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      color: var(--pink-deep);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .card-del-btn:active {
+      background: var(--pink-hover);
+      color: #fff;
+      transform: scale(0.9);
+    }
+
+    /* Empty states */
+    .empty-banner {
+      text-align: center;
+      padding: 2.8rem 1.2rem;
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      border: 2px dashed var(--border-pink);
+      color: var(--text-muted);
+      grid-column: 1 / -1;
+    }
+
+    .empty-banner .icon {
+      font-size: 2.6rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Memories & Goals Styling */
+    .memory-item {
+      background: #ffffff;
+      border-left: 5px solid var(--pink-primary);
+      padding: 1.1rem 1.25rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      border-top: 1.5px solid var(--pink-soft);
+      border-right: 1.5px solid var(--pink-soft);
+      border-bottom: 1.5px solid var(--pink-soft);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .memory-date {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.78rem;
+      color: var(--pink-hover);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+
+    .memory-item h4 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.08rem;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+    }
+
+    .memory-item p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+      white-space: pre-wrap;
+    }
+
+    .goals-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+    }
+
+    @media (min-width: 600px) {
+      .goals-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .goal-card {
+      background: #ffffff;
+      padding: 1.1rem;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--pink-soft);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+    }
+
+    .goal-card input[type="checkbox"] {
+      margin-top: 0.2rem;
+      width: 19px;
+      height: 19px;
+      accent-color: var(--pink-primary);
+    }
+
+    .goal-tag {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.72rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 9999px;
+      background: var(--pink-soft);
+      color: var(--pink-deep);
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 0.3rem;
+    }
+
+    .goal-content.completed p {
       text-decoration: line-through;
-      color: #bfaab2;
+      color: #b8a3ac;
+    }
+
+    .item-del-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: #ff8fa3;
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 0 0.2rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 1rem;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.9rem;
+      color: var(--pink-hover);
     }
   </style>
 </head>
 <body>
 
-  <!-- Top App Header -->
-  <header class="app-header">
-    <h1>Faizatu's Space 🌸</h1>
-    <p>Snapshots, memories & little dreams ✨</p>
-  </header>
-
-  <!-- App Content -->
-  <main class="app-content">
-
-    <!-- VIEW 1: iPHONE-STYLE 3-COLUMN GALLERY GRID -->
-    <section id="view-gallery">
-      <div class="section-title">
-        <span>Gallery 🖼️</span>
-        <button class="btn-clear" onclick="clearAllMedia()">Clear All</button>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-top">
+        <div class="profile-title">
+          <h1>Faizatu's Space 🌸</h1>
+          <p>Snapshots, video clips, cozy thoughts & dreams ✨</p>
+        </div>
+        <div class="header-emoji">🌷</div>
       </div>
-      <div class="ios-photo-grid" id="grid-container"></div>
+
+      <nav class="nav-tabs" aria-label="Sections">
+        <button class="tab-btn active" onclick="filterTab('all', this)">All 🎀</button>
+        <button class="tab-btn" onclick="filterTab('photos', this)">Photos & Clips 📸</button>
+        <button class="tab-btn" onclick="filterTab('memories', this)">Memories 💌</button>
+        <button class="tab-btn" onclick="filterTab('goals', this)">Goals 🌷</button>
+      </nav>
+    </header>
+
+    <!-- SECTION 1: VISIBLE PHOTOS & CLIPS JOURNAL -->
+    <section id="photos-sec">
+      <div class="section-header">
+        <h2>Photo & Video Journal 📸</h2>
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+          <div class="view-switcher">
+            <button class="view-btn active" id="view-feed-btn" onclick="setGalleryLayout('feed')">Feed View 📱</button>
+            <button class="view-btn" id="view-cols-btn" onclick="setGalleryLayout('columns')">Columns 🌸</button>
+          </div>
+          <button class="btn-clear" onclick="clearAllMedia()">Clear All</button>
+        </div>
+      </div>
+
+      <!-- Add New Photo / Video -->
+      <div class="add-box">
+        <h4>Post a New Picture or Video Clip 🌷</h4>
+        <div class="input-row">
+          <label class="file-picker-label">
+            🎀 Tap to Choose Photo or Video
+            <input 
+              type="file" 
+              id="media-file-input" 
+              accept="image/*,video/*,.heic,.HEIC,.mov,.mp4" 
+              style="display:none;" 
+              onchange="handleFileSelect(this)"
+            />
+          </label>
+          <span id="chosen-file-label" style="font-size:0.86rem; font-weight:600; color:var(--text-muted); text-align:center;">No file selected</span>
+          <input type="text" id="media-caption" placeholder="Write a cute caption for this moment..." />
+        </div>
+        
+        <div id="status-msg" style="font-size:0.88rem; font-weight:700; color:var(--pink-hover); text-align:center;"></div>
+        <button class="btn-cute" id="upload-btn" onclick="uploadMedia()">Post to Gallery ✨</button>
+      </div>
+
+      <!-- Generous Natural Gallery Grid -->
+      <div class="media-gallery-grid layout-feed" id="gallery-container"></div>
     </section>
 
-    <!-- VIEW 2: POST / UPLOAD -->
-    <section id="view-upload" style="display:none;">
-      <div class="app-card">
-        <div class="section-title" style="padding:0;">Post Photo or Video 📸</div>
-        
-        <label class="btn-upload">
-          🎀 Pick from iPhone Library
-          <input type="file" id="media-input" accept="image/*,video/*,.heic,.HEIC,.mov,.mp4" style="display:none;" onchange="handleSelect(this)">
-        </label>
-        
-        <div id="file-name-label" style="font-size:0.8rem; font-weight:600; color:var(--text-muted); text-align:center;">No file chosen</div>
-        <input type="text" id="caption-input" placeholder="Write a cute caption..." />
-        <div id="status-msg" style="font-size:0.82rem; font-weight:700; color:var(--pink-hover); text-align:center;"></div>
-        <button class="btn-cute" onclick="saveMedia()">Add to Gallery ✨</button>
+    <!-- SECTION 2: MEMORIES -->
+    <section id="memories-sec">
+      <div class="section-header">
+        <h2>Cherished Memories 💌</h2>
       </div>
-    </section>
 
-    <!-- VIEW 3: MEMORIES -->
-    <section id="view-memories" style="display:none;">
-      <div class="app-card" style="margin-bottom:1rem;">
-        <div class="section-title" style="padding:0;">Save a Memory 💌</div>
-        <input type="text" id="mem-date" placeholder="Date (e.g. Sept 2026)" />
-        <input type="text" id="mem-title" placeholder="Memory Title..." />
-        <textarea id="mem-text" rows="2" placeholder="What happened today?"></textarea>
-        <button class="btn-cute" onclick="saveMemory()">Save Moment 💖</button>
+      <div class="add-box">
+        <h4>Note Down a Memory 💭</h4>
+        <div class="input-row two-col">
+          <input type="text" id="mem-date" placeholder="Date (e.g. Sept 2026)" />
+          <input type="text" id="mem-title" placeholder="Title of this moment..." />
+        </div>
+        <textarea id="mem-text" rows="2" placeholder="Tell the cozy story of what happened..."></textarea>
+        <button class="btn-cute" onclick="addMemory()">Save Memory 💖</button>
       </div>
+
       <div id="memories-container"></div>
     </section>
 
-    <!-- VIEW 4: GOALS -->
-    <section id="view-goals" style="display:none;">
-      <div class="app-card" style="margin-bottom:1rem;">
-        <div class="section-title" style="padding:0;">New Dream 🎯</div>
-        <select id="goal-cat">
-          <option value="Academic 📚">Academic 📚</option>
-          <option value="Personal 🌸">Personal 🌸</option>
-          <option value="Creative 🎨">Creative 🎨</option>
-          <option value="Career 💼">Career 💼</option>
-        </select>
-        <input type="text" id="goal-text" placeholder="What are you chasing?" />
-        <button class="btn-cute" onclick="saveGoal()">Add Goal 💫</button>
+    <!-- SECTION 3: GOALS -->
+    <section id="goals-sec">
+      <div class="section-header">
+        <h2>Goals & Aspirations 🌟</h2>
       </div>
-      <div id="goals-container"></div>
+
+      <div class="add-box">
+        <h4>Set a New Goal 🎯</h4>
+        <div class="input-row two-col">
+          <select id="goal-category">
+            <option value="Personal 🌸">Personal 🌸</option>
+            <option value="Academic 📚">Academic 📚</option>
+            <option value="Creative 🎨">Creative 🎨</option>
+            <option value="Career 💼">Career 💼</option>
+          </select>
+          <input type="text" id="goal-desc" placeholder="What dream are you pursuing next?" />
+        </div>
+        <button class="btn-cute" onclick="addGoal()">Add Goal 💫</button>
+      </div>
+
+      <div class="goals-grid" id="goals-container"></div>
     </section>
 
-  </main>
-
-  <!-- Fullscreen Modal Viewer -->
-  <div class="viewer-modal" id="viewer-modal">
-    <div class="viewer-top">
-      <button class="viewer-close" onclick="closeViewer()">✕</button>
-      <button class="viewer-del" id="viewer-del-btn">🗑️</button>
-    </div>
-    <div class="viewer-body" id="viewer-body"></div>
-    <div class="viewer-info">
-      <h4 id="viewer-caption"></h4>
-      <p id="viewer-date"></p>
-    </div>
+    <footer>
+      <p>Made with love & pretty dreams 🌸 &bull; Faizatu's Corner</p>
+    </footer>
   </div>
-
-  <!-- Mobile App Bottom Navigation Bar -->
-  <nav class="bottom-nav">
-    <button class="nav-item active" onclick="switchView('gallery', this)">
-      <span class="icon">🖼️</span>
-      <span>Gallery</span>
-    </button>
-    <button class="nav-item" onclick="switchView('upload', this)">
-      <span class="icon">➕</span>
-      <span>Post</span>
-    </button>
-    <button class="nav-item" onclick="switchView('memories', this)">
-      <span class="icon">💌</span>
-      <span>Memories</span>
-    </button>
-    <button class="nav-item" onclick="switchView('goals', this)">
-      <span class="icon">🌷</span>
-      <span>Goals</span>
-    </button>
-  </nav>
 
   <script>
     const DB_NAME = "FaizatuPinkCornerDB";
     const DB_VERSION = 3;
     let db;
-    let mediaItems = [];
+    let currentGalleryLayout = 'feed'; // 'feed' (spacious full view) or 'columns' (2-3 columns)
 
     function openDatabase() {
       return new Promise((resolve, reject) => {
@@ -524,151 +731,149 @@
       });
     }
 
-    function switchView(tabName, btn) {
-      document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    // --- Media Management ---
+    let selectedFile = null;
 
-      document.getElementById('view-gallery').style.display = tabName === 'gallery' ? 'block' : 'none';
-      document.getElementById('view-upload').style.display = tabName === 'upload' ? 'block' : 'none';
-      document.getElementById('view-memories').style.display = tabName === 'memories' ? 'block' : 'none';
-      document.getElementById('view-goals').style.display = tabName === 'goals' ? 'block' : 'none';
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Media Handling
-    let currentFile = null;
-
-    function handleSelect(input) {
+    function handleFileSelect(input) {
       if (input.files && input.files[0]) {
-        currentFile = input.files[0];
-        document.getElementById('file-name-label').textContent = currentFile.name;
+        selectedFile = input.files[0];
+        const isVideo = selectedFile.type.startsWith("video/") || selectedFile.name.toLowerCase().endsWith(".mov");
+        document.getElementById('chosen-file-label').textContent = (isVideo ? "🎥 Video: " : "📸 Photo: ") + selectedFile.name;
       }
     }
 
-    async function saveMedia() {
-      const caption = document.getElementById('caption-input').value.trim() || 'Cozy moment 🌸';
+    async function uploadMedia() {
+      const caption = document.getElementById('media-caption').value.trim() || 'Pretty moment 🌸';
       const status = document.getElementById('status-msg');
+      const uploadBtn = document.getElementById('upload-btn');
 
-      if (!currentFile) {
-        alert("Please pick an image or video first! 🎀");
+      if (!selectedFile) {
+        alert("Please pick a photo or video first! 🎀");
         return;
       }
 
-      let fileToStore = currentFile;
-      const fileName = currentFile.name.toLowerCase();
-      const isVideo = currentFile.type.startsWith("video/") || fileName.endsWith(".mov") || fileName.endsWith(".mp4");
+      uploadBtn.disabled = true;
+      status.textContent = "Processing and posting to your gallery... ✨";
 
-      if (fileName.endsWith(".heic") || currentFile.type === "image/heic") {
-        status.textContent = "Processing iPhone photo... ✨";
+      let fileToStore = selectedFile;
+      const fileName = selectedFile.name.toLowerCase();
+      const isVideo = selectedFile.type.startsWith("video/") || fileName.endsWith(".mov") || fileName.endsWith(".mp4");
+
+      // Seamless iPhone HEIC picture conversion
+      if (fileName.endsWith(".heic") || selectedFile.type === "image/heic") {
+        status.textContent = "Converting iPhone HEIC picture... 🌸";
         try {
           if (typeof heic2any !== "undefined") {
-            const converted = await heic2any({ blob: currentFile, toType: "image/jpeg", quality: 0.9 });
+            const converted = await heic2any({ blob: selectedFile, toType: "image/jpeg", quality: 0.92 });
             fileToStore = Array.isArray(converted) ? converted[0] : converted;
           }
         } catch (err) {
-          console.error("HEIC error: ", err);
+          console.warn("HEIC direct conversion note: ", err);
         }
       }
-
-      status.textContent = "Adding to gallery... 🌸";
 
       await dbPut("media", {
         id: Date.now(),
         type: isVideo ? "video" : "image",
         blob: fileToStore,
         caption: caption,
-        date: new Date().toLocaleDateString()
+        date: new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
       });
 
-      currentFile = null;
-      document.getElementById('media-input').value = "";
-      document.getElementById('file-name-label').textContent = "No file chosen";
-      document.getElementById('caption-input').value = "";
+      selectedFile = null;
+      document.getElementById('media-file-input').value = "";
+      document.getElementById('chosen-file-label').textContent = "No file selected";
+      document.getElementById('media-caption').value = "";
       status.textContent = "";
+      uploadBtn.disabled = false;
 
-      switchView('gallery', document.querySelectorAll('.nav-item')[0]);
       loadMedia();
     }
 
     async function loadMedia() {
-      mediaItems = await dbGetAll("media");
-      mediaItems.sort((a, b) => b.id - a.id);
-      const grid = document.getElementById('grid-container');
+      const list = await dbGetAll("media");
+      list.sort((a, b) => b.id - a.id);
+      const container = document.getElementById('gallery-container');
 
-      if (mediaItems.length === 0) {
-        grid.style.display = 'block';
-        grid.innerHTML = `
-          <div style="text-align:center; padding: 2.5rem 1rem; color:var(--text-muted);">
-            <p style="font-weight:600; font-size:1rem;">Your gallery is empty! 🌸</p>
-            <p style="font-size:0.82rem; margin-top:0.3rem;">Tap the <b>➕ Post</b> button to add photos and clips.</p>
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="empty-banner">
+            <span class="icon">🌸</span>
+            <p>Your journal gallery is empty!<br>Tap <b>Choose Photo or Video</b> above to post your first moment ✨</p>
           </div>
         `;
         return;
       }
 
-      grid.style.display = 'grid';
-      grid.innerHTML = mediaItems.map((item, index) => {
+      container.innerHTML = list.map(item => {
         const url = URL.createObjectURL(item.blob);
-        const thumb = item.type === "video"
-          ? `<video src="${url}#t=0.5" preload="metadata"></video><span class="video-badge">▶ Video</span>`
-          : `<img src="${url}" alt="${item.caption}" loading="lazy" />`;
+        const isVideo = item.type === "video";
+        
+        const mediaTag = isVideo
+          ? `<video src="${url}" controls playsinline webkit-playsinline preload="metadata"></video>`
+          : `<img src="${url}" alt="${escapeHtml(item.caption)}" loading="lazy" />`;
+
+        const typeLabel = isVideo ? "🎥 Video Clip" : "📸 Snapshot";
 
         return `
-          <div class="grid-thumb" onclick="openViewer(${index})">
-            ${thumb}
+          <div class="journal-media-card">
+            <button class="card-del-btn" title="Delete" onclick="removeMedia(${item.id})">✕</button>
+            <div class="media-asset-container">
+              ${mediaTag}
+            </div>
+            <div class="media-caption-area">
+              <h4>${escapeHtml(item.caption)}</h4>
+              <div class="media-meta">
+                <span>${item.date}</span>
+                <span class="media-tag-pill">${typeLabel}</span>
+              </div>
+            </div>
           </div>
         `;
       }).join('');
     }
 
-    // Modal Viewer
-    function openViewer(index) {
-      const item = mediaItems[index];
-      if (!item) return;
-
-      const url = URL.createObjectURL(item.blob);
-      const body = document.getElementById('viewer-body');
-      
-      body.innerHTML = item.type === "video"
-        ? `<video src="${url}" controls autoplay playsinline webkit-playsinline></video>`
-        : `<img src="${url}" alt="${item.caption}" />`;
-
-      document.getElementById('viewer-caption').textContent = item.caption;
-      document.getElementById('viewer-date').textContent = `${item.date} • ${item.type === 'video' ? 'Video' : 'Photo'}`;
-
-      document.getElementById('viewer-del-btn').onclick = async () => {
-        if (confirm("Delete this photo/video?")) {
-          await dbDelete("media", item.id);
-          closeViewer();
-          loadMedia();
-        }
-      };
-
-      document.getElementById('viewer-modal').style.display = 'flex';
-    }
-
-    function closeViewer() {
-      const modal = document.getElementById('viewer-modal');
-      modal.style.display = 'none';
-      document.getElementById('viewer-body').innerHTML = ""; // Stop video playback
+    async function removeMedia(id) {
+      if (confirm("Delete this photo or video from your journal? 🌸")) {
+        await dbDelete("media", id);
+        loadMedia();
+      }
     }
 
     async function clearAllMedia() {
-      if (confirm("Clear all items from your gallery?")) {
+      if (confirm("Are you sure you want to clear all pictures and clips?")) {
         await dbClear("media");
         loadMedia();
       }
     }
 
-    // Memories
-    async function saveMemory() {
-      const date = document.getElementById('mem-date').value.trim() || new Date().toLocaleDateString();
+    function setGalleryLayout(mode) {
+      currentGalleryLayout = mode;
+      const container = document.getElementById('gallery-container');
+      const feedBtn = document.getElementById('view-feed-btn');
+      const colsBtn = document.getElementById('view-cols-btn');
+
+      if (mode === 'feed') {
+        container.classList.remove('layout-columns');
+        container.classList.add('layout-feed');
+        feedBtn.classList.add('active');
+        colsBtn.classList.remove('active');
+      } else {
+        container.classList.remove('layout-feed');
+        container.classList.add('layout-columns');
+        colsBtn.classList.add('active');
+        feedBtn.classList.remove('active');
+      }
+    }
+
+    // --- Memories ---
+    async function addMemory() {
+      const date = document.getElementById('mem-date').value.trim() || new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
       const title = document.getElementById('mem-title').value.trim();
       const text = document.getElementById('mem-text').value.trim();
 
       if (!title || !text) {
-        alert("Please write a title and memory description! 💕");
+        alert("Please write both a title and description for your memory! 💕");
         return;
       }
 
@@ -685,18 +890,23 @@
       const container = document.getElementById('memories-container');
 
       if (list.length === 0) {
-        container.innerHTML = `<p style="text-align:center; color:var(--text-muted); font-size:0.85rem; font-weight:600; padding:1rem;">No memories written down yet 💭</p>`;
+        container.innerHTML = `
+          <div class="empty-banner">
+            <span class="icon">💌</span>
+            <p>No memories noted down yet. What made you smile recently? 💭</p>
+          </div>
+        `;
         return;
       }
 
       container.innerHTML = list.map(m => `
-        <div class="mem-item">
+        <div class="memory-item">
           <div>
-            <span style="font-family:'Fredoka'; font-size:0.7rem; color:var(--pink-hover);">${m.date}</span>
-            <h4 style="font-family:'Fredoka'; font-size:0.98rem; color:var(--text-main); margin-top:0.1rem;">${m.title}</h4>
-            <p style="color:var(--text-muted); font-size:0.85rem; font-weight:600; margin-top:0.2rem;">${m.text}</p>
+            <div class="memory-date">${escapeHtml(m.date)}</div>
+            <h4>${escapeHtml(m.title)}</h4>
+            <p>${escapeHtml(m.text)}</p>
           </div>
-          <button onclick="removeMemory(${m.id})" style="border:none; background:none; cursor:pointer; color:#ff8fa3; font-size:1rem; font-weight:bold;">✕</button>
+          <button class="item-del-btn" onclick="removeMemory(${m.id})">✕</button>
         </div>
       `).join('');
     }
@@ -706,18 +916,18 @@
       loadMemories();
     }
 
-    // Goals
-    async function saveGoal() {
-      const cat = document.getElementById('goal-cat').value;
-      const text = document.getElementById('goal-text').value.trim();
+    // --- Goals ---
+    async function addGoal() {
+      const cat = document.getElementById('goal-category').value;
+      const text = document.getElementById('goal-desc').value.trim();
 
       if (!text) {
-        alert("Please type out your goal! 🌷");
+        alert("Please enter a goal! 🌷");
         return;
       }
 
       await dbPut("goals", { id: Date.now(), category: cat, text, done: false });
-      document.getElementById('goal-text').value = "";
+      document.getElementById('goal-desc').value = "";
       loadGoals();
     }
 
@@ -742,27 +952,55 @@
       const container = document.getElementById('goals-container');
 
       if (list.length === 0) {
-        container.innerHTML = `<p style="text-align:center; color:var(--text-muted); font-size:0.85rem; font-weight:600; padding:1rem;">No goals added yet ✨</p>`;
+        container.innerHTML = `
+          <div class="empty-banner" style="grid-column: 1 / -1;">
+            <span class="icon">🌟</span>
+            <p>No goals written yet. Set a cute milestone to chase! ✨</p>
+          </div>
+        `;
         return;
       }
 
       container.innerHTML = list.map(g => `
-        <div class="goal-row">
+        <div class="goal-card">
           <input type="checkbox" ${g.done ? 'checked' : ''} onchange="toggleGoal(${g.id}, ${g.done})">
-          <div style="flex:1;">
-            <span class="goal-badge">${g.category}</span>
-            <p class="${g.done ? 'done-text' : ''}" style="font-weight:600; font-size:0.86rem; margin-top:0.25rem;">${g.text}</p>
+          <div class="goal-content ${g.done ? 'completed' : ''}" style="flex:1;">
+            <span class="goal-tag">${escapeHtml(g.category)}</span>
+            <p style="font-weight:600; font-size:0.92rem; margin-top:0.2rem;">${escapeHtml(g.text)}</p>
           </div>
-          <button onclick="removeGoal(${g.id})" style="border:none; background:none; cursor:pointer; color:#ff8fa3; font-size:0.95rem; font-weight:bold;">✕</button>
+          <button class="item-del-btn" onclick="removeGoal(${g.id})">✕</button>
         </div>
       `).join('');
     }
 
-    // Init
-    openDatabase().then(() => {
-      loadMedia();
-      loadMemories();
-      loadGoals();
+    // --- Tabs ---
+    function filterTab(tab, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const isAll = tab === 'all';
+      document.getElementById('photos-sec').style.display = (isAll || tab === 'photos') ? 'block' : 'none';
+      document.getElementById('memories-sec').style.display = (isAll || tab === 'memories') ? 'block' : 'none';
+      document.getElementById('goals-sec').style.display = (isAll || tab === 'goals') ? 'block' : 'none';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // Startup
+    window.addEventListener('DOMContentLoaded', () => {
+      openDatabase().then(() => {
+        loadMedia();
+        loadMemories();
+        loadGoals();
+      });
     });
   </script>
 </body>
