@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
@@ -9,14 +8,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
-  <!-- PWA & Mobile App Settings -->
+
+  <!-- iOS App Settings -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Faizatu's Space" />
+  <meta name="apple-mobile-web-app-title" content="Faizatu" />
   <meta name="theme-color" content="#fff5f8" />
-
-  <!-- App Icon on your iPhone Home Screen -->
   <link rel="apple-touch-icon" href="https://img.icons8.com/fluency/192/cherry-blossom.png" />
+
   <style>
     :root {
       --bg: #fff5f8;
@@ -38,22 +37,20 @@
 
     html, body {
       width: 100%;
-      height: 100%;
       overflow-x: hidden;
       background-color: var(--bg);
       font-family: 'Quicksand', sans-serif;
       color: var(--text-main);
     }
 
-  body {
+    body {
       display: flex;
       flex-direction: column;
-      /* Perfectly fits bottom bar + safe area home bar without unnecessary extra scrolling */
       padding-bottom: calc(65px + env(safe-area-inset-bottom));
       min-height: 100vh;
     }
 
-  /* Fixed Clean App Top Header with iPhone Notch / Island padding */
+    /* Fixed Clean App Top Header with iPhone Notch fix */
     .app-header {
       position: sticky;
       top: 0;
@@ -62,7 +59,6 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1.5px solid #ffd6e0;
-      /* Adds safe padding so the Dynamic Island / Notch never touches the title */
       padding-top: max(0.8rem, env(safe-area-inset-top));
       padding-bottom: 0.7rem;
       padding-left: 1rem;
@@ -88,7 +84,7 @@
       width: 100%;
       max-width: 480px;
       margin: 0 auto;
-      padding: 0.85rem;
+      padding: 0.85rem 0.6rem;
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
@@ -100,7 +96,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: calc(62px + env(safe-area-inset-bottom));
+      height: calc(58px + env(safe-area-inset-bottom));
       padding-bottom: env(safe-area-inset-bottom);
       background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(16px);
@@ -139,12 +135,128 @@
       color: var(--pink-primary);
     }
 
-    .nav-item.active .icon {
-      transform: scale(1.15);
-      transition: transform 0.15s ease;
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.15rem;
+      color: var(--pink-deep);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0.3rem;
+      margin-bottom: 0.6rem;
     }
 
-    /* Card Panels */
+    /* 3-COLUMN iPHONE PHOTO GRID */
+    .ios-photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      padding: 3px;
+      border: 1.5px solid #ffe5ec;
+    }
+
+    .grid-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #f7e6ec;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .grid-thumb img, .grid-thumb video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-badge {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: rgba(0, 0, 0, 0.65);
+      color: #fff;
+      font-size: 0.65rem;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: 'Fredoka', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    /* FULLSCREEN PHOTO/VIDEO VIEWER MODAL */
+    .viewer-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(18, 12, 15, 0.96);
+      z-index: 2000;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: max(1rem, env(safe-area-inset-top)) 1rem max(1rem, env(safe-area-inset-bottom)) 1rem;
+    }
+
+    .viewer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+    }
+
+    .viewer-close, .viewer-del {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .viewer-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 70vh;
+    }
+
+    .viewer-body img, .viewer-body video {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .viewer-info {
+      text-align: center;
+      color: #fff;
+      padding: 0.8rem;
+    }
+
+    .viewer-info h4 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .viewer-info p {
+      font-size: 0.8rem;
+      color: #ffd6e0;
+    }
+
+    /* Form Panels */
     .app-card {
       background: #ffffff;
       border-radius: var(--radius);
@@ -156,17 +268,6 @@
       gap: 0.8rem;
     }
 
-    .section-title {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1.15rem;
-      color: var(--pink-deep);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.2rem;
-    }
-
-    /* Mobile Form Inputs */
     input[type="text"], textarea, select {
       width: 100%;
       padding: 0.75rem 0.9rem;
@@ -178,10 +279,6 @@
       background: #fff;
       outline: none;
       color: var(--text-main);
-    }
-
-    input:focus, textarea:focus, select:focus {
-      border-color: var(--pink-primary);
     }
 
     .btn-cute {
@@ -226,92 +323,14 @@
       cursor: pointer;
     }
 
-    /* SCROLLABLE FEED (INSTAGRAM/APP STYLE) */
-    .gallery-feed {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      width: 100%;
-    }
-
-    .media-card {
-      background: #ffffff;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1.5px solid #ffe5ec;
-      box-shadow: 0 6px 18px rgba(255, 117, 143, 0.1);
-      position: relative;
-    }
-
-    /* Full picture containment - never crops heads or sides */
-    .media-display {
-      width: 100%;
-      background: #140d10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 240px;
-      max-height: 480px;
-    }
-
-    .media-card img {
-      width: 100%;
-      height: auto;
-      max-height: 480px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .media-card video {
-      width: 100%;
-      max-height: 480px;
-      display: block;
-      background: #000;
-    }
-
-    .media-card-info {
-      padding: 0.85rem 1rem;
-      background: #fff;
-    }
-
-    .media-card-info h4 {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1rem;
-      color: var(--pink-deep);
-      margin-bottom: 0.15rem;
-    }
-
-    .media-card-info p {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .del-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--pink-deep);
-      border: none;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 0.8rem;
-      z-index: 2;
-    }
-
     /* Memories & Goals */
     .mem-item {
       background: #fff;
       border-left: 4px solid var(--pink-primary);
       padding: 0.9rem 1rem;
       border-radius: 0 16px 16px 0;
-      border-top: 1px solid #ffe5ec;
-      border-right: 1px solid #ffe5ec;
-      border-bottom: 1px solid #ffe5ec;
+      border: 1px solid #ffe5ec;
+      border-left: 4px solid var(--pink-primary);
       margin-bottom: 0.75rem;
       display: flex;
       justify-content: space-between;
@@ -360,29 +379,29 @@
     <p>Snapshots, memories & little dreams ✨</p>
   </header>
 
-  <!-- App Content Container -->
+  <!-- App Content -->
   <main class="app-content">
 
-    <!-- VIEW 1: SCROLLABLE GALLERY FEED (DEFAULT VIEW) -->
+    <!-- VIEW 1: iPHONE-STYLE 3-COLUMN GALLERY GRID -->
     <section id="view-gallery">
       <div class="section-title">
         <span>Gallery 🖼️</span>
         <button class="btn-clear" onclick="clearAllMedia()">Clear All</button>
       </div>
-      <div class="gallery-feed" id="feed-container"></div>
+      <div class="ios-photo-grid" id="grid-container"></div>
     </section>
 
-    <!-- VIEW 2: POST / UPLOAD MEDIA -->
+    <!-- VIEW 2: POST / UPLOAD -->
     <section id="view-upload" style="display:none;">
       <div class="app-card">
-        <div class="section-title">Post Snapshot or Video 📸</div>
+        <div class="section-title" style="padding:0;">Post Photo or Video 📸</div>
         
         <label class="btn-upload">
           🎀 Pick from iPhone Library
           <input type="file" id="media-input" accept="image/*,video/*,.heic,.HEIC,.mov,.mp4" style="display:none;" onchange="handleSelect(this)">
         </label>
         
-        <div id="file-name-label" style="font-size:0.8rem; font-weight:600; color:var(--text-muted); text-align:center;">No photo or video chosen</div>
+        <div id="file-name-label" style="font-size:0.8rem; font-weight:600; color:var(--text-muted); text-align:center;">No file chosen</div>
         <input type="text" id="caption-input" placeholder="Write a cute caption..." />
         <div id="status-msg" style="font-size:0.82rem; font-weight:700; color:var(--pink-hover); text-align:center;"></div>
         <button class="btn-cute" onclick="saveMedia()">Add to Gallery ✨</button>
@@ -392,7 +411,7 @@
     <!-- VIEW 3: MEMORIES -->
     <section id="view-memories" style="display:none;">
       <div class="app-card" style="margin-bottom:1rem;">
-        <div class="section-title">Save a Memory 💌</div>
+        <div class="section-title" style="padding:0;">Save a Memory 💌</div>
         <input type="text" id="mem-date" placeholder="Date (e.g. Sept 2026)" />
         <input type="text" id="mem-title" placeholder="Memory Title..." />
         <textarea id="mem-text" rows="2" placeholder="What happened today?"></textarea>
@@ -404,7 +423,7 @@
     <!-- VIEW 4: GOALS -->
     <section id="view-goals" style="display:none;">
       <div class="app-card" style="margin-bottom:1rem;">
-        <div class="section-title">New Dream 🎯</div>
+        <div class="section-title" style="padding:0;">New Dream 🎯</div>
         <select id="goal-cat">
           <option value="Academic 📚">Academic 📚</option>
           <option value="Personal 🌸">Personal 🌸</option>
@@ -418,6 +437,19 @@
     </section>
 
   </main>
+
+  <!-- Fullscreen Modal Viewer -->
+  <div class="viewer-modal" id="viewer-modal">
+    <div class="viewer-top">
+      <button class="viewer-close" onclick="closeViewer()">✕</button>
+      <button class="viewer-del" id="viewer-del-btn">🗑️</button>
+    </div>
+    <div class="viewer-body" id="viewer-body"></div>
+    <div class="viewer-info">
+      <h4 id="viewer-caption"></h4>
+      <p id="viewer-date"></p>
+    </div>
+  </div>
 
   <!-- Mobile App Bottom Navigation Bar -->
   <nav class="bottom-nav">
@@ -443,6 +475,7 @@
     const DB_NAME = "FaizatuPinkCornerDB";
     const DB_VERSION = 3;
     let db;
+    let mediaItems = [];
 
     function openDatabase() {
       return new Promise((resolve, reject) => {
@@ -491,7 +524,6 @@
       });
     }
 
-    // Tab switcher
     function switchView(tabName, btn) {
       document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -504,7 +536,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Media Logic
+    // Media Handling
     let currentFile = null;
 
     function handleSelect(input) {
@@ -527,7 +559,6 @@
       const fileName = currentFile.name.toLowerCase();
       const isVideo = currentFile.type.startsWith("video/") || fileName.endsWith(".mov") || fileName.endsWith(".mp4");
 
-      // Auto convert HEIC
       if (fileName.endsWith(".heic") || currentFile.type === "image/heic") {
         status.textContent = "Processing iPhone photo... ✨";
         try {
@@ -540,7 +571,7 @@
         }
       }
 
-      status.textContent = "Adding to feed... 🌸";
+      status.textContent = "Adding to gallery... 🌸";
 
       await dbPut("media", {
         id: Date.now(),
@@ -552,52 +583,75 @@
 
       currentFile = null;
       document.getElementById('media-input').value = "";
-      document.getElementById('file-name-label').textContent = "No photo or video chosen";
+      document.getElementById('file-name-label').textContent = "No file chosen";
       document.getElementById('caption-input').value = "";
       status.textContent = "";
 
-      // Move user directly to gallery feed
       switchView('gallery', document.querySelectorAll('.nav-item')[0]);
       loadMedia();
     }
 
     async function loadMedia() {
-      const list = await dbGetAll("media");
-      list.sort((a, b) => b.id - a.id);
-      const feed = document.getElementById('feed-container');
+      mediaItems = await dbGetAll("media");
+      mediaItems.sort((a, b) => b.id - a.id);
+      const grid = document.getElementById('grid-container');
 
-      if (list.length === 0) {
-        feed.innerHTML = `
+      if (mediaItems.length === 0) {
+        grid.style.display = 'block';
+        grid.innerHTML = `
           <div style="text-align:center; padding: 2.5rem 1rem; color:var(--text-muted);">
             <p style="font-weight:600; font-size:1rem;">Your gallery is empty! 🌸</p>
-            <p style="font-size:0.82rem; margin-top:0.3rem;">Tap the <b>➕ Post</b> button below to upload your pictures and videos.</p>
+            <p style="font-size:0.82rem; margin-top:0.3rem;">Tap the <b>➕ Post</b> button to add photos and clips.</p>
           </div>
         `;
         return;
       }
 
-      feed.innerHTML = list.map(item => {
+      grid.style.display = 'grid';
+      grid.innerHTML = mediaItems.map((item, index) => {
         const url = URL.createObjectURL(item.blob);
-        const mediaTag = item.type === "video"
-          ? `<video src="${url}" controls playsinline webkit-playsinline preload="metadata"></video>`
+        const thumb = item.type === "video"
+          ? `<video src="${url}#t=0.5" preload="metadata"></video><span class="video-badge">▶ Video</span>`
           : `<img src="${url}" alt="${item.caption}" loading="lazy" />`;
 
         return `
-          <div class="media-card">
-            <button class="del-btn" onclick="removeMedia(${item.id})">✕</button>
-            <div class="media-display">${mediaTag}</div>
-            <div class="media-card-info">
-              <h4>${item.caption}</h4>
-              <p>${item.date} &bull; ${item.type === 'video' ? 'Video 🎥' : 'Photo 📸'}</p>
-            </div>
+          <div class="grid-thumb" onclick="openViewer(${index})">
+            ${thumb}
           </div>
         `;
       }).join('');
     }
 
-    async function removeMedia(id) {
-      await dbDelete("media", id);
-      loadMedia();
+    // Modal Viewer
+    function openViewer(index) {
+      const item = mediaItems[index];
+      if (!item) return;
+
+      const url = URL.createObjectURL(item.blob);
+      const body = document.getElementById('viewer-body');
+      
+      body.innerHTML = item.type === "video"
+        ? `<video src="${url}" controls autoplay playsinline webkit-playsinline></video>`
+        : `<img src="${url}" alt="${item.caption}" />`;
+
+      document.getElementById('viewer-caption').textContent = item.caption;
+      document.getElementById('viewer-date').textContent = `${item.date} • ${item.type === 'video' ? 'Video' : 'Photo'}`;
+
+      document.getElementById('viewer-del-btn').onclick = async () => {
+        if (confirm("Delete this photo/video?")) {
+          await dbDelete("media", item.id);
+          closeViewer();
+          loadMedia();
+        }
+      };
+
+      document.getElementById('viewer-modal').style.display = 'flex';
+    }
+
+    function closeViewer() {
+      const modal = document.getElementById('viewer-modal');
+      modal.style.display = 'none';
+      document.getElementById('viewer-body').innerHTML = ""; // Stop video playback
     }
 
     async function clearAllMedia() {
