@@ -2,392 +2,589 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <title>Faizatu's Cozy Corner 🌸✨</title>
+  
+  <!-- Google Fonts for cute typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --bg: #fff0f5;
-      --card-bg: rgba(255, 255, 255, 0.92);
+      --card-bg: rgba(255, 255, 255, 0.94);
       --pink-soft: #ffe5ec;
+      --pink-medium: #ffccd5;
       --pink-primary: #ff758f;
       --pink-hover: #ff4d6d;
       --pink-deep: #a4133c;
-      --accent-lilac: #e8dff5;
+      --accent-lilac: #f3ecfb;
       --text-main: #4a2835;
       --text-muted: #8d6b77;
-      --border-cute: 2px dashed #ffb3c1;
-      --radius: 24px;
-      --shadow: 0 10px 25px rgba(255, 117, 143, 0.12);
+      --radius-sm: 14px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --shadow-soft: 0 10px 24px rgba(255, 117, 143, 0.14);
+      --shadow-hover: 0 14px 28px rgba(255, 117, 143, 0.22);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
       font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(135deg, #fff0f5 0%, #fff5f8 50%, #fdeff4 100%);
+      background: linear-gradient(145deg, #fff0f5 0%, #fff7fa 45%, #fdeff4 100%);
       color: var(--text-main);
-      line-height: 1.6;
-      padding: 2.5rem 1rem;
+      line-height: 1.5;
+      padding: env(safe-area-inset-top, 1rem) env(safe-area-inset-right, 0.75rem) calc(env(safe-area-inset-bottom, 1.5rem) + 1.5rem) env(safe-area-inset-left, 0.75rem);
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     .container {
-      max-width: 980px;
+      max-width: 920px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 2.5rem;
+      gap: 1.4rem;
     }
 
-    /* Cute Header */
     header {
       background: var(--card-bg);
-      border-radius: 32px;
-      padding: 2.2rem;
-      border: 3px solid #ffccd5;
-      box-shadow: var(--shadow);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.25rem;
+      border: 2px solid var(--pink-medium);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .header-content {
+      display: flex;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
+      justify-content: space-between;
+      gap: 0.8rem;
     }
 
     .profile-title h1 {
       font-family: 'Fredoka', sans-serif;
-      font-size: 2.4rem;
+      font-size: 1.85rem;
       color: var(--pink-hover);
-      letter-spacing: -0.5px;
-      margin-bottom: 0.2rem;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
     }
 
     .profile-title p {
       color: var(--text-muted);
-      font-size: 1.05rem;
+      font-size: 0.92rem;
       font-weight: 600;
+      margin-top: 0.2rem;
+    }
+
+    .header-sparkle {
+      font-size: 2.2rem;
+      line-height: 1;
+      animation: floatSparkle 3s ease-in-out infinite;
+    }
+
+    @keyframes floatSparkle {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(6deg); }
     }
 
     .nav-tabs {
       display: flex;
-      gap: 0.6rem;
-      background: #fff;
-      padding: 0.4rem;
+      gap: 0.45rem;
+      background: #ffffff;
+      padding: 0.35rem;
       border-radius: 9999px;
-      border: 2px solid #ffccd5;
+      border: 2px solid var(--pink-medium);
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+    .nav-tabs::-webkit-scrollbar { display: none; }
 
     .tab-btn {
       background: transparent;
       border: none;
-      padding: 0.55rem 1.25rem;
+      padding: 0.55rem 1.15rem;
       border-radius: 9999px;
       font-family: 'Fredoka', sans-serif;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
       color: var(--text-muted);
-      transition: all 0.25s ease;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
     }
 
-    .tab-btn.active, .tab-btn:hover {
+    .tab-btn.active {
       background: var(--pink-primary);
       color: #fff;
-      transform: scale(1.04);
-      box-shadow: 0 4px 12px rgba(255, 117, 143, 0.35);
+      box-shadow: 0 4px 12px rgba(255, 117, 143, 0.4);
+      transform: scale(1.02);
     }
 
-    /* Section Styling */
     .section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.2rem;
-      padding: 0 0.5rem;
+      margin-bottom: 0.9rem;
+      padding: 0 0.3rem;
     }
 
     .section-header h2 {
       font-family: 'Fredoka', sans-serif;
-      font-size: 1.8rem;
+      font-size: 1.45rem;
       color: var(--pink-deep);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
     }
 
-    /* Cute Add Box */
+    .count-badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: var(--pink-soft);
+      color: var(--pink-deep);
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+    }
+
     .add-box {
       background: var(--card-bg);
-      border: 2px solid #ffccd5;
-      border-radius: var(--radius);
-      padding: 1.8rem;
-      box-shadow: var(--shadow);
-      margin-bottom: 2rem;
+      border: 2px solid var(--pink-medium);
+      border-radius: var(--radius-md);
+      padding: 1.3rem;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 1.3rem;
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      gap: 0.95rem;
+      backdrop-filter: blur(8px);
     }
 
     .add-box h4 {
       font-family: 'Fredoka', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--pink-hover);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
     }
 
     .input-row {
       display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      align-items: center;
+      flex-direction: column;
+      gap: 0.75rem;
     }
 
     input[type="text"], textarea, select {
-      flex: 1;
-      padding: 0.8rem 1.1rem;
-      border-radius: 16px;
-      border: 2px solid #ffe5ec;
+      width: 100%;
+      padding: 0.8rem 1.05rem;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--pink-soft);
       font-family: 'Quicksand', sans-serif;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       background: #ffffff;
       outline: none;
-      transition: border-color 0.2s ease;
       color: var(--text-main);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     input:focus, textarea:focus, select:focus {
       border-color: var(--pink-primary);
-    }
-
-    /* Buttons */
-    .btn-cute {
-      background: linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%);
-      color: #fff;
-      padding: 0.8rem 1.6rem;
-      border-radius: 9999px;
-      border: none;
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(255, 77, 109, 0.3);
-      transition: all 0.2s ease;
-      align-self: flex-start;
-    }
-
-    .btn-cute:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(255, 77, 109, 0.45);
+      box-shadow: 0 0 0 3px rgba(255, 117, 143, 0.15);
     }
 
     .file-picker-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.3rem;
-      background: #fff;
-      border: 2px solid #ffccd5;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.8rem 1.25rem;
+      background: #ffffff;
+      border: 2px solid var(--pink-medium);
       border-radius: 9999px;
       font-family: 'Fredoka', sans-serif;
       color: var(--pink-hover);
       cursor: pointer;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 600;
       transition: all 0.2s ease;
+      text-align: center;
     }
 
-    .file-picker-btn:hover {
-      background: #ffe5ec;
+    .file-picker-btn:active {
+      transform: scale(0.98);
+      background: var(--pink-soft);
+    }
+
+    .file-info-badge {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: block;
+      padding-left: 0.2rem;
+    }
+
+    .btn-cute {
+      background: linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%);
+      color: #fff;
+      padding: 0.85rem 1.5rem;
+      border-radius: 9999px;
+      border: none;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.98rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(255, 77, 109, 0.35);
+      transition: all 0.2s ease;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn-cute:active {
+      transform: scale(0.97);
+      box-shadow: 0 2px 8px rgba(255, 77, 109, 0.25);
+    }
+
+    .btn-cute:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .btn-clear {
       background: #fff0f3;
-      border: 1.5px solid #ffccd5;
+      border: 1.5px solid var(--pink-medium);
       color: var(--pink-deep);
       font-family: 'Fredoka', sans-serif;
-      font-size: 0.85rem;
-      padding: 0.4rem 0.9rem;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.85rem;
       border-radius: 9999px;
       cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s ease;
     }
 
-    /* Photo Grid & Cards */
-    .photo-grid {
+    .btn-clear:active {
+      background: var(--pink-soft);
+    }
+
+    .media-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.8rem;
+      grid-template-columns: 1fr;
+      gap: 1.3rem;
     }
 
-    .photo-card {
+    @media (min-width: 640px) {
+      .media-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .input-row.two-col {
+        flex-direction: row;
+      }
+      .btn-cute {
+        width: auto;
+        align-self: flex-start;
+      }
+    }
+
+    .media-card {
       background: #ffffff;
-      border-radius: 28px;
+      border-radius: var(--radius-md);
       overflow: hidden;
-      border: 3px solid #ffe5ec;
-      box-shadow: var(--shadow);
+      border: 2.5px solid var(--pink-soft);
+      box-shadow: var(--shadow-soft);
       display: flex;
       flex-direction: column;
       position: relative;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .photo-card:hover {
-      transform: translateY(-5px);
-      border-color: #ffb3c1;
-      box-shadow: 0 14px 28px rgba(255, 117, 143, 0.2);
+    .media-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--pink-medium);
     }
 
-    /* Instagram-proportioned image framing: naturally displays face & shoulders */
-    .photo-card img {
+    /* Soft aesthetic frame that guarantees no heads, faces, or text are cropped */
+    .media-frame {
       width: 100%;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      object-position: center 20%;
+      background: #1f1418;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 270px;
+      max-height: 480px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .media-frame img {
+      width: 100%;
+      height: 100%;
+      max-height: 480px;
+      object-fit: contain;
       display: block;
-      background: #ffeef2;
     }
 
-    .photo-info {
-      padding: 1.2rem 1.4rem;
-      background: #fff;
+    .media-frame video {
+      width: 100%;
+      height: 100%;
+      max-height: 480px;
+      display: block;
+      object-fit: contain;
+      background: #1f1418;
     }
 
-    .photo-info h4 {
+    .media-info {
+      padding: 1rem 1.15rem;
+      background: #ffffff;
+    }
+
+    .media-info h4 {
       font-family: 'Fredoka', sans-serif;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       color: var(--pink-deep);
       margin-bottom: 0.25rem;
+      word-break: break-word;
     }
 
-    .photo-info p {
-      font-size: 0.85rem;
+    .media-info .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
       color: var(--text-muted);
       font-weight: 600;
+    }
+
+    .media-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 12px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.72rem;
+      background: var(--pink-soft);
+      color: var(--pink-deep);
     }
 
     .delete-btn {
       position: absolute;
       top: 12px;
       right: 12px;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(4px);
-      color: var(--pink-deep);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: var(--pink-hover);
       border: none;
       width: 32px;
       height: 32px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 0.9rem;
       font-weight: bold;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: background 0.2s;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      z-index: 5;
+      transition: background 0.2s ease, transform 0.15s ease;
     }
 
-    .delete-btn:hover {
-      background: #ff4d6d;
+    .delete-btn:active {
+      transform: scale(0.9);
+      background: var(--pink-hover);
       color: #fff;
     }
 
-    /* Memories List */
-    .memory-list {
+    .gallery-feed-wrapper {
+      max-width: 540px;
+      margin: 0 auto;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      gap: 1.6rem;
     }
 
-    .memory-item {
-      background: #ffffff;
-      border-left: 6px solid var(--pink-primary);
-      padding: 1.4rem 1.6rem;
-      border-radius: 0 24px 24px 0;
-      border-top: 2px solid #ffe5ec;
-      border-right: 2px solid #ffe5ec;
-      border-bottom: 2px solid #ffe5ec;
-      box-shadow: var(--shadow);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-
-    .memory-date {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 0.85rem;
-      color: var(--pink-hover);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.2rem;
-    }
-
-    .memory-item h4 {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1.15rem;
-      color: var(--text-main);
-      margin-bottom: 0.4rem;
-    }
-
-    .memory-item p {
+    .empty-state {
+      text-align: center;
+      padding: 2.5rem 1.2rem;
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      border: 2px dashed var(--pink-medium);
       color: var(--text-muted);
+    }
+
+    .empty-state .icon {
+      font-size: 2.8rem;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .empty-state p {
       font-size: 0.95rem;
       font-weight: 600;
     }
 
-    /* Goals */
+    .memory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .memory-card {
+      background: #ffffff;
+      border-left: 5.5px solid var(--pink-primary);
+      padding: 1.15rem 1.25rem;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      border-top: 1.5px solid var(--pink-soft);
+      border-right: 1.5px solid var(--pink-soft);
+      border-bottom: 1.5px solid var(--pink-soft);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.9rem;
+      transition: transform 0.2s ease;
+    }
+
+    .memory-card:hover {
+      transform: translateX(3px);
+    }
+
+    .memory-date {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.8rem;
+      color: var(--pink-hover);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.2rem;
+      font-weight: 600;
+    }
+
+    .memory-card h4 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.12rem;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+    }
+
+    .memory-card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+      white-space: pre-wrap;
+    }
+
     .goals-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+    }
+
+    @media (min-width: 640px) {
+      .goals-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .goal-card {
       background: #ffffff;
-      padding: 1.4rem;
-      border-radius: 24px;
-      border: 2px solid #ffe5ec;
-      box-shadow: var(--shadow);
+      padding: 1.1rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--pink-soft);
+      box-shadow: var(--shadow-soft);
       display: flex;
-      gap: 0.9rem;
+      gap: 0.85rem;
       align-items: flex-start;
-      transition: transform 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     .goal-card:hover {
+      border-color: var(--pink-medium);
       transform: translateY(-2px);
-      border-color: #ffccd5;
     }
 
     .goal-card input[type="checkbox"] {
-      margin-top: 0.3rem;
+      margin-top: 0.25rem;
       width: 20px;
       height: 20px;
       accent-color: var(--pink-primary);
       cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .goal-details {
+      flex: 1;
     }
 
     .goal-tag {
       display: inline-block;
       font-family: 'Fredoka', sans-serif;
-      font-size: 0.75rem;
-      padding: 0.25rem 0.7rem;
-      border-radius: 20px;
-      background: #ffe5ec;
+      font-size: 0.72rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      background: var(--pink-soft);
       color: var(--pink-deep);
       font-weight: 600;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
     }
 
-    .goal-content.completed p {
+    .goal-details p {
+      font-weight: 600;
+      font-size: 0.94rem;
+      color: var(--text-main);
+    }
+
+    .goal-details.completed p {
       text-decoration: line-through;
-      color: #b5a3ab;
+      color: #bfaab3;
+    }
+
+    .item-delete-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: #ff9ebb;
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 0 0.3rem;
+      transition: color 0.15s ease;
+      line-height: 1;
+    }
+
+    .item-delete-btn:hover {
+      color: var(--pink-hover);
     }
 
     footer {
       text-align: center;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
       font-family: 'Fredoka', sans-serif;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--pink-hover);
     }
   </style>
@@ -395,79 +592,98 @@
 <body>
 
   <div class="container">
-    <!-- Header -->
     <header>
-      <div class="profile-title">
-        <h1>Faizatu's Space 🌸</h1>
-        <p>A little pink corner for my snapshots, dreams & thoughts ✨</p>
+      <div class="header-content">
+        <div class="profile-title">
+          <h1>Faizatu's Space 🌸</h1>
+          <p>Snaps, videos, cozy memories & dreams ✨</p>
+        </div>
+        <div class="header-sparkle">🌷</div>
       </div>
-      <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="filterTab('all', this)">All 🎀</button>
-        <button class="tab-btn" onclick="filterTab('photos', this)">Photos 📸</button>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs" aria-label="Page Sections">
+        <button class="tab-btn active" onclick="filterTab('all', this)">Overview 🎀</button>
+        <button class="tab-btn" onclick="filterTab('gallery', this)">Gallery Feed 🖼️</button>
+        <button class="tab-btn" onclick="filterTab('photos', this)">Upload Media 📸🎥</button>
         <button class="tab-btn" onclick="filterTab('memories', this)">Memories 💌</button>
         <button class="tab-btn" onclick="filterTab('goals', this)">Goals 🌷</button>
       </nav>
     </header>
 
-    <!-- SECTION 1: PHOTOS -->
-    <section id="photos-sec">
+    <section id="gallery-sec" style="display:none;">
       <div class="section-header">
-        <h2>Photo Journal 📸</h2>
-        <button class="btn-clear" onclick="clearAllPhotos()">Clear Photos</button>
+        <h2>Gallery Feed 📱✨ <span class="count-badge" id="feed-count">0</span></h2>
       </div>
-
-      <div class="add-box">
-        <h4>Post a New Picture 🌷</h4>
-        <div class="input-row">
-          <label class="file-picker-btn">
-            🎀 Pick Image
-            <input type="file" id="file-input" accept="image/*" style="display:none;" onchange="handleFileSelect(this)">
-          </label>
-          <span id="chosen-file-label" style="font-size:0.88rem; font-weight:600; color:var(--text-muted);">No picture chosen</span>
-          <input type="text" id="photo-caption" placeholder="Write a cute caption..." />
-        </div>
-        <div id="status-msg" style="font-size:0.88rem; font-weight:700; color:var(--pink-hover);"></div>
-        <button class="btn-cute" onclick="uploadPhoto()">Add to Gallery ✨</button>
-      </div>
-
-      <div class="photo-grid" id="photo-container"></div>
+      <div class="gallery-feed-wrapper" id="gallery-feed-container"></div>
     </section>
 
-    <!-- SECTION 2: MEMORIES -->
-    <section id="memories-sec">
+    <section id="photos-sec">
       <div class="section-header">
-        <h2>Cherished Memories 💌</h2>
+        <h2>Media Journal 📸🎥 <span class="count-badge" id="media-count">0</span></h2>
+        <button class="btn-clear" onclick="clearAllMedia()">Clear Media</button>
       </div>
 
       <div class="add-box">
-        <h4>Note Down a Memory 💭</h4>
+        <h4>Post a Picture or Video Clip 🌷</h4>
+        
         <div class="input-row">
-          <input type="text" id="mem-date" placeholder="Date (e.g. Sept 2026)" style="max-width:200px;" />
+          <!-- iPhone & iOS optimized picker -->
+          <label class="file-picker-btn">
+            🎀 Choose Photo or Video
+            <input 
+              type="file" 
+              id="media-file-input" 
+              accept="image/*,video/*,video/mp4,video/quicktime" 
+              style="display:none;" 
+              onchange="handleMediaSelect(this)"
+            />
+          </label>
+          <span class="file-info-badge" id="chosen-file-label">No photo or video selected</span>
+          <input type="text" id="media-caption" placeholder="Write a cute caption or title..." />
+        </div>
+
+        <div id="status-msg" style="font-size:0.86rem; font-weight:700; color:var(--pink-hover);"></div>
+        <button class="btn-cute" id="upload-btn" onclick="uploadMedia()">Add to Gallery ✨</button>
+      </div>
+
+      <div class="media-grid" id="media-container"></div>
+    </section>
+
+    <section id="memories-sec">
+      <div class="section-header">
+        <h2>Cherished Memories 💌 <span class="count-badge" id="memory-count">0</span></h2>
+      </div>
+
+      <div class="add-box">
+        <h4>Note Down a Sweet Moment 💭</h4>
+        <div class="input-row two-col">
+          <input type="text" id="mem-date" placeholder="Date (e.g. Sept 2026 or Today)" />
           <input type="text" id="mem-title" placeholder="Title of this moment..." />
         </div>
-        <textarea id="mem-text" rows="2" placeholder="Tell the story of what happened..."></textarea>
+        <textarea id="mem-text" rows="3" placeholder="Tell the cozy story of what happened..."></textarea>
         <button class="btn-cute" onclick="addMemory()">Save Memory 💖</button>
       </div>
 
       <div class="memory-list" id="memories-container"></div>
     </section>
 
-    <!-- SECTION 3: GOALS -->
     <section id="goals-sec">
       <div class="section-header">
-        <h2>Goals & Aspirations 🌟</h2>
+        <h2>Goals & Aspirations 🌟 <span class="count-badge" id="goal-count">0</span></h2>
       </div>
 
       <div class="add-box">
         <h4>Set a New Goal 🎯</h4>
-        <div class="input-row">
-          <select id="goal-category" style="max-width:180px;">
-            <option value="Academic 📚">Academic 📚</option>
+        <div class="input-row two-col">
+          <select id="goal-category">
             <option value="Personal 🌸">Personal 🌸</option>
+            <option value="Academic 📚">Academic 📚</option>
             <option value="Creative 🎨">Creative 🎨</option>
+            <option value="Health & Cozy 🍵">Health & Cozy 🍵</option>
             <option value="Career 💼">Career 💼</option>
           </select>
-          <input type="text" id="goal-desc" placeholder="What dream are you chasing next?" />
+          <input type="text" id="goal-desc" placeholder="What dream are you pursuing next?" />
         </div>
         <button class="btn-cute" onclick="addGoal()">Add Goal 💫</button>
       </div>
@@ -476,26 +692,38 @@
     </section>
 
     <footer>
-      <p>Made with love & pretty dreams 🌸 &bull; Faizatu's Journal</p>
+      <p>Made with love & pretty dreams 🌸 &bull; Faizatu's Corner</p>
     </footer>
   </div>
 
   <script>
-    // --- IndexedDB Configuration (Reliable local browser storage) ---
+    // --- IndexedDB Configuration (Client-side persistent storage for blobs & text) ---
     const DB_NAME = "FaizatuPinkCornerDB";
-    const DB_VERSION = 1;
+    const DB_VERSION = 3;
     let db;
+
+    // Cache URLs created via URL.createObjectURL to cleanly revoke and avoid memory leaks
+    let activeObjectUrls = [];
 
     function openDatabase() {
       return new Promise((resolve, reject) => {
         const req = indexedDB.open(DB_NAME, DB_VERSION);
         req.onupgradeneeded = (e) => {
           const d = e.target.result;
-          if (!d.objectStoreNames.contains("photos")) d.createObjectStore("photos", { keyPath: "id" });
-          if (!d.objectStoreNames.contains("memories")) d.createObjectStore("memories", { keyPath: "id" });
-          if (!d.objectStoreNames.contains("goals")) d.createObjectStore("goals", { keyPath: "id" });
+          if (!d.objectStoreNames.contains("media")) {
+            d.createObjectStore("media", { keyPath: "id" });
+          }
+          if (!d.objectStoreNames.contains("memories")) {
+            d.createObjectStore("memories", { keyPath: "id" });
+          }
+          if (!d.objectStoreNames.contains("goals")) {
+            d.createObjectStore("goals", { keyPath: "id" });
+          }
         };
-        req.onsuccess = () => { db = req.result; resolve(); };
+        req.onsuccess = () => {
+          db = req.result;
+          resolve();
+        };
         req.onerror = () => reject(req.error);
       });
     }
@@ -533,121 +761,168 @@
       });
     }
 
-    // --- Photo Management ---
+    function cleanupActiveUrls() {
+      activeObjectUrls.forEach(url => URL.revokeObjectURL(url));
+      activeObjectUrls = [];
+    }
+
     let selectedFile = null;
 
-    function handleFileSelect(input) {
+    function handleMediaSelect(input) {
       if (input.files && input.files[0]) {
         selectedFile = input.files[0];
-        document.getElementById('chosen-file-label').textContent = selectedFile.name;
+        const isVideo = selectedFile.type.startsWith("video/") || selectedFile.name.toLowerCase().endsWith(".mov");
+        const fileIcon = isVideo ? "🎥" : "📸";
+        document.getElementById('chosen-file-label').textContent = `${fileIcon} Selected: ${selectedFile.name}`;
       }
     }
 
-    async function uploadPhoto() {
-      const caption = document.getElementById('photo-caption').value.trim() || 'Pretty moment 🌸';
+    async function uploadMedia() {
+      const captionInput = document.getElementById('media-caption');
+      const caption = captionInput.value.trim() || 'Cozy moment 🌸';
       const status = document.getElementById('status-msg');
+      const uploadBtn = document.getElementById('upload-btn');
 
       if (!selectedFile) {
-        alert("Please pick a picture first! 🎀");
+        status.textContent = "Please pick a photo or video first! 🎀";
+        setTimeout(() => { status.textContent = ""; }, 3000);
         return;
       }
 
-      status.textContent = "Processing picture with sparkle... ✨";
+      uploadBtn.disabled = true;
+      status.textContent = "Saving to your pink journal... ✨";
 
       try {
-        const bitmap = await createImageBitmap(selectedFile);
-        const canvas = document.createElement('canvas');
+        const isVideo = selectedFile.type.startsWith("video/") || selectedFile.name.toLowerCase().endsWith(".mov");
 
-        // Smoothly resize to portrait standard
-        const maxDimension = 1400;
-        let width = bitmap.width;
-        let height = bitmap.height;
-
-        if (width > height && width > maxDimension) {
-          height = Math.round((height * maxDimension) / width);
-          width = maxDimension;
-        } else if (height > maxDimension) {
-          width = Math.round((width * maxDimension) / height);
-          height = maxDimension;
-        }
-
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(bitmap, 0, 0, width, height);
-
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.88);
-
-        await dbPut("photos", {
+        const mediaItem = {
           id: Date.now(),
-          src: dataUrl,
+          type: isVideo ? "video" : "image",
+          blob: selectedFile,
           caption: caption,
-          date: new Date().toLocaleDateString()
-        });
+          date: new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
+        };
 
+        await dbPut("media", mediaItem);
+
+        // Reset inputs
         selectedFile = null;
-        document.getElementById('file-input').value = "";
-        document.getElementById('chosen-file-label').textContent = "No picture chosen";
-        document.getElementById('photo-caption').value = "";
-        status.textContent = "";
+        document.getElementById('media-file-input').value = "";
+        document.getElementById('chosen-file-label').textContent = "No photo or video selected";
+        captionInput.value = "";
+        status.textContent = "Uploaded successfully! 💖";
+        setTimeout(() => { status.textContent = ""; }, 2500);
 
-        loadPhotos();
+        await loadMedia();
       } catch (err) {
-        console.error(err);
-        status.textContent = "";
-        alert("Could not load image format. Please make sure it's a standard image file.");
+        console.error("Upload error:", err);
+        status.textContent = "Could not complete upload. Please try again! 🌸";
+      } finally {
+        uploadBtn.disabled = false;
       }
     }
 
-    async function loadPhotos() {
-      const list = await dbGetAll("photos");
+    async function loadMedia() {
+      cleanupActiveUrls();
+      const list = await dbGetAll("media");
       list.sort((a, b) => b.id - a.id);
-      const container = document.getElementById('photo-container');
+
+      const gridContainer = document.getElementById('media-container');
+      const feedContainer = document.getElementById('gallery-feed-container');
+      
+      document.getElementById('media-count').textContent = list.length;
+      document.getElementById('feed-count').textContent = list.length;
 
       if (list.length === 0) {
-        container.innerHTML = `<p style="color:var(--text-muted); font-size:0.95rem; font-weight:600;">No pictures added yet! Click 'Pick Image' above to add your first snapshot 🌸</p>`;
+        const emptyGridHtml = `
+          <div class="empty-state" style="grid-column: 1 / -1;">
+            <span class="icon">📸</span>
+            <p>No snapshots or videos posted yet!<br/>Pick a photo or clip above to begin your gallery 🌸</p>
+          </div>
+        `;
+        const emptyFeedHtml = `
+          <div class="empty-state">
+            <span class="icon">🖼️</span>
+            <p>Your feed is empty! Add pictures or videos to scroll through them here ✨</p>
+          </div>
+        `;
+        gridContainer.innerHTML = emptyGridHtml;
+        feedContainer.innerHTML = emptyFeedHtml;
         return;
       }
 
-      container.innerHTML = list.map(item => `
-        <div class="photo-card">
-          <button class="delete-btn" onclick="removePhoto(${item.id})">✕</button>
-          <img src="${item.src}" alt="${item.caption}" />
-          <div class="photo-info">
-            <h4>${item.caption}</h4>
-            <p>${item.date}</p>
+      const generateCardHtml = (item) => {
+        const url = URL.createObjectURL(item.blob);
+        activeObjectUrls.push(url);
+
+        const isVideo = item.type === "video";
+        const mediaElement = isVideo
+          ? `<video src="${url}" controls playsinline webkit-playsinline preload="metadata"></video>`
+          : `<img src="${url}" alt="${item.caption}" loading="lazy" />`;
+
+        const tagLabel = isVideo ? "🎥 Video Clip" : "📸 Snapshot";
+
+        return `
+          <div class="media-card">
+            <button class="delete-btn" title="Remove" onclick="removeMedia(${item.id})">✕</button>
+            <div class="media-frame">
+              ${mediaElement}
+            </div>
+            <div class="media-info">
+              <h4>${escapeHtml(item.caption)}</h4>
+              <div class="meta-row">
+                <span>${item.date}</span>
+                <span class="media-tag">${tagLabel}</span>
+              </div>
+            </div>
           </div>
-        </div>
-      `).join('');
+        `;
+      };
+
+      const renderedHtml = list.map(generateCardHtml).join('');
+      gridContainer.innerHTML = renderedHtml;
+      feedContainer.innerHTML = renderedHtml;
     }
 
-    async function removePhoto(id) {
-      await dbDelete("photos", id);
-      loadPhotos();
-    }
-
-    async function clearAllPhotos() {
-      if (confirm("Do you want to clear your uploaded photos?")) {
-        await dbClear("photos");
-        loadPhotos();
+    async function removeMedia(id) {
+      if (confirm("Delete this memory from your gallery? 🌸")) {
+        await dbDelete("media", id);
+        loadMedia();
       }
     }
 
-    // --- Memories Management ---
+    async function clearAllMedia() {
+      if (confirm("Are you sure you want to clear all uploaded photos and videos?")) {
+        await dbClear("media");
+        loadMedia();
+      }
+    }
+
     async function addMemory() {
-      const date = document.getElementById('mem-date').value.trim() || new Date().toLocaleDateString();
-      const title = document.getElementById('mem-title').value.trim();
-      const text = document.getElementById('mem-text').value.trim();
+      const dateInput = document.getElementById('mem-date');
+      const titleInput = document.getElementById('mem-title');
+      const textInput = document.getElementById('mem-text');
+
+      const date = dateInput.value.trim() || new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+      const title = titleInput.value.trim();
+      const text = textInput.value.trim();
 
       if (!title || !text) {
-        alert("Please write a title and memory description! 💕");
+        alert("Please write both a title and details for your memory! 💕");
         return;
       }
 
-      await dbPut("memories", { id: Date.now(), date, title, text });
-      document.getElementById('mem-date').value = "";
-      document.getElementById('mem-title').value = "";
-      document.getElementById('mem-text').value = "";
+      await dbPut("memories", {
+        id: Date.now(),
+        date,
+        title,
+        text
+      });
+
+      dateInput.value = "";
+      titleInput.value = "";
+      textInput.value = "";
+
       loadMemories();
     }
 
@@ -655,20 +930,26 @@
       const list = await dbGetAll("memories");
       list.sort((a, b) => b.id - a.id);
       const container = document.getElementById('memories-container');
+      document.getElementById('memory-count').textContent = list.length;
 
       if (list.length === 0) {
-        container.innerHTML = `<p style="color:var(--text-muted); font-size:0.95rem; font-weight:600;">No memories recorded yet. What made you smile recently? 💭</p>`;
+        container.innerHTML = `
+          <div class="empty-state">
+            <span class="icon">💌</span>
+            <p>No memories noted down yet. What made you smile recently? 💭</p>
+          </div>
+        `;
         return;
       }
 
       container.innerHTML = list.map(m => `
-        <div class="memory-item">
-          <div>
-            <div class="memory-date">${m.date}</div>
-            <h4>${m.title}</h4>
-            <p>${m.text}</p>
+        <div class="memory-card">
+          <div style="flex:1;">
+            <div class="memory-date">${escapeHtml(m.date)}</div>
+            <h4>${escapeHtml(m.title)}</h4>
+            <p>${escapeHtml(m.text)}</p>
           </div>
-          <button onclick="removeMemory(${m.id})" style="border:none; background:none; cursor:pointer; color:#ff8fa3; font-size:1.1rem; font-weight:bold;">✕</button>
+          <button class="item-delete-btn" onclick="removeMemory(${m.id})" title="Delete Memory">✕</button>
         </div>
       `).join('');
     }
@@ -678,18 +959,24 @@
       loadMemories();
     }
 
-    // --- Goals Management ---
     async function addGoal() {
       const cat = document.getElementById('goal-category').value;
-      const text = document.getElementById('goal-desc').value.trim();
+      const descInput = document.getElementById('goal-desc');
+      const text = descInput.value.trim();
 
       if (!text) {
-        alert("Please type out your goal! 🌷");
+        alert("Please describe your goal! 🌷");
         return;
       }
 
-      await dbPut("goals", { id: Date.now(), category: cat, text, done: false });
-      document.getElementById('goal-desc').value = "";
+      await dbPut("goals", {
+        id: Date.now(),
+        category: cat,
+        text,
+        done: false
+      });
+
+      descInput.value = "";
       loadGoals();
     }
 
@@ -712,39 +999,65 @@
       const list = await dbGetAll("goals");
       list.sort((a, b) => b.id - a.id);
       const container = document.getElementById('goals-container');
+      document.getElementById('goal-count').textContent = list.length;
 
       if (list.length === 0) {
-        container.innerHTML = `<p style="color:var(--text-muted); font-size:0.95rem; font-weight:600;">No goals added yet. Dream big! ✨</p>`;
+        container.innerHTML = `
+          <div class="empty-state" style="grid-column: 1 / -1;">
+            <span class="icon">🎯</span>
+            <p>No goals set yet. Dream big, write one down! ✨</p>
+          </div>
+        `;
         return;
       }
 
       container.innerHTML = list.map(g => `
         <div class="goal-card">
-          <input type="checkbox" ${g.done ? 'checked' : ''} onchange="toggleGoal(${g.id}, ${g.done})">
-          <div class="goal-content ${g.done ? 'completed' : ''}">
-            <span class="goal-tag">${g.category}</span>
-            <p style="font-weight: 600; font-size: 0.95rem;">${g.text}</p>
+          <input type="checkbox" ${g.done ? 'checked' : ''} onchange="toggleGoal(${g.id}, ${g.done})" />
+          <div class="goal-details ${g.done ? 'completed' : ''}">
+            <span class="goal-tag">${escapeHtml(g.category)}</span>
+            <p>${escapeHtml(g.text)}</p>
           </div>
-          <button onclick="removeGoal(${g.id})" style="border:none; background:none; cursor:pointer; color:#ff8fa3; font-size:1rem; font-weight:bold;">✕</button>
+          <button class="item-delete-btn" onclick="removeGoal(${g.id})" title="Delete Goal">✕</button>
         </div>
       `).join('');
     }
 
-    // Tab Filtering
     function filterTab(tab, btn) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      document.getElementById('photos-sec').style.display = (tab === 'all' || tab === 'photos') ? 'block' : 'none';
-      document.getElementById('memories-sec').style.display = (tab === 'all' || tab === 'memories') ? 'block' : 'none';
-      document.getElementById('goals-sec').style.display = (tab === 'all' || tab === 'goals') ? 'block' : 'none';
+      const isAll = tab === 'all';
+      document.getElementById('gallery-sec').style.display = (tab === 'gallery') ? 'block' : 'none';
+      document.getElementById('photos-sec').style.display = (isAll || tab === 'photos') ? 'block' : 'none';
+      document.getElementById('memories-sec').style.display = (isAll || tab === 'memories') ? 'block' : 'none';
+      document.getElementById('goals-sec').style.display = (isAll || tab === 'goals') ? 'block' : 'none';
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Boot
-    openDatabase().then(() => {
-      loadPhotos();
-      loadMemories();
-      loadGoals();
+    // XSS safety helper
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // Initialize application on window load
+    window.addEventListener('DOMContentLoaded', () => {
+      openDatabase()
+        .then(() => {
+          loadMedia();
+          loadMemories();
+          loadGoals();
+        })
+        .catch(err => {
+          console.error("Database failed to initialize:", err);
+        });
     });
   </script>
 </body>
