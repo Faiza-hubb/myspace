@@ -45,13 +45,15 @@
       color: var(--text-main);
     }
 
-    body {
+  body {
       display: flex;
       flex-direction: column;
-      padding-bottom: calc(75px + env(safe-area-inset-bottom));
+      /* Perfectly fits bottom bar + safe area home bar without unnecessary extra scrolling */
+      padding-bottom: calc(65px + env(safe-area-inset-bottom));
+      min-height: 100vh;
     }
 
-    /* Fixed Clean App Top Header */
+  /* Fixed Clean App Top Header with iPhone Notch / Island padding */
     .app-header {
       position: sticky;
       top: 0;
@@ -60,7 +62,11 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1.5px solid #ffd6e0;
-      padding: 0.8rem 1rem;
+      /* Adds safe padding so the Dynamic Island / Notch never touches the title */
+      padding-top: max(0.8rem, env(safe-area-inset-top));
+      padding-bottom: 0.7rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
       text-align: center;
     }
 
